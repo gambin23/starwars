@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import Planet from './../../models/Planet';
 import { Observable } from 'rxjs';
-import { map, startWith, debounceTime } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
-import { Planet } from 'src/models/Planet';
+import { debounceTime, startWith, map } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-navigation',
-  templateUrl: './navigation.component.html',
-  styleUrls: ['./navigation.component.scss']
+  selector: 'app-planets',
+  templateUrl: './planets.component.html',
+  styleUrls: ['./planets.component.scss']
 })
-export class NavigationComponent implements OnInit {
-  constructor(private breakpointObserver: BreakpointObserver) { }
+export class PlanetsComponent implements OnInit {
+
+  constructor() { }
 
   planets: Planet[] = [{ name: 'Alderaan' }, { name: 'Yavin IV' }, { name: 'Dagobah' }, { name: 'Bespin' }, { name: 'Endor' },
   { name: 'Naboo' }, { name: 'Coruscant' }, { name: 'Kamino' }, { name: 'Geonosis' }];
@@ -29,4 +29,5 @@ export class NavigationComponent implements OnInit {
   private filter(value: string): Planet[] {
     return this.planets.filter(planet => planet.name.toLowerCase().includes(value.toLowerCase())).sort();
   }
+
 }
