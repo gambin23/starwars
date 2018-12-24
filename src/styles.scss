@@ -68,3 +68,22 @@ body {
 .row-minor {
   color: gray;
 }
+
+.error {
+  font-family: $font-primary;
+  font-size: 12px;
+  text-align: center;
+  padding: 25px 0;
+}
+
+.is-active {
+  background-color: red;
+}
+
+.favourite {
+  color: mat-color($primary);
+}
+
+.favourite-off {
+  color: #c0c0c0;
+}

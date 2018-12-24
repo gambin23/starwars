@@ -4,15 +4,16 @@
   </mat-form-field>
 </mat-toolbar>
 <div style="background-color: #212121;">
-  <button mat-button class="button-nav">Previous</button>
-  <button mat-button class="button-nav">Next</button>
+  <button mat-button [disabled]="(planetList$ | async)?.previous == null" (click)="onPreviousPage()" class="button-nav">Previous</button>
+  <button mat-button [disabled]="(planetList$ | async)?.next == null" (click)="onNextPage()" class="button-nav">Next</button>
 </div>
-<mat-progress-bar mode="indeterminate"></mat-progress-bar>
+<mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+<div *ngIf="error != null" class="error">{{error}}</div>
 <mat-nav-list>
-  <div *ngFor="let planet of (filteredPlanets$ | async)">
-    <mat-list-item (click)="loadPersons(planet)" style="font-family:Starwars">
+  <div *ngFor="let planet of filteredPlanets$ | async">
+    <mat-list-item (click)="onLoadPersons(planet)" style="font-family:Starwars">
       <a href="#favourite" style="margin-right: 15px">
-        <mat-icon style="color: #c0c0c0;">star_border</mat-icon>
+        <mat-icon class="favourite-off">star_border</mat-icon>
       </a>
       {{ planet.name }}
     </mat-list-item>

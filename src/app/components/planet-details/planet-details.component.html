@@ -1,6 +1,11 @@
-<div id="planet-details-header">{{(planet$ | async).name.toUpperCase()}} - {{(planet$ | async).residents.length}} residents</div>
-<mat-progress-bar *ngIf="(planet$ | async).residents.length > (residents$ | async).length" mode="indeterminate"></mat-progress-bar>
-<div id="no-residents" *ngIf="(planet$ | async).residents.length == 0">There are no residents on this planet</div>
+<div id="planet-details-header">
+  <a href="#favourite" style="margin-left: 8px; float: left;">
+    <mat-icon class="favourite">stars</mat-icon>
+  </a>
+  {{(planet$ | async)?.name.toUpperCase()}} - {{(planet$ | async)?.residents.length}} residents
+</div>
+<mat-progress-bar *ngIf="(planet$ | async)?.residents.length > (residents$ | async)?.length" mode="indeterminate"></mat-progress-bar>
+<div id="no-residents" *ngIf="(planet$ | async)?.residents.length == 0">There are no residents on this planet</div>
 <mat-table [dataSource]="(residents$ | async)" class="table">
   <ng-container matColumnDef="name">
     <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>

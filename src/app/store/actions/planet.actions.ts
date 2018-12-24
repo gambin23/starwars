@@ -1,14 +1,13 @@
 import { Action } from '@ngrx/store';
-import { Planet } from '../../models/planet.model';
+import { PlanetList } from '../../models/planet-list.model';
 
-export const ADD_PLANET = '[PLANET] ADD';
+export const ADD_PLANETS = '[PLANETS] ADD';
 
-export class AddPlanet implements Action {
-  readonly type = ADD_PLANET;
+export class AddPlanets implements Action {
+  readonly type = ADD_PLANETS;
 
-  constructor(public payload: Planet) {
-
+  constructor(public payload: PlanetList) {
   }
 }
 
-export type Actions = AddPlanet;
+export type Actions = AddPlanets;

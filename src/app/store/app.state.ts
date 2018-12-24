@@ -1,7 +1,7 @@
 import { Resident } from '../models/resident.model';
-import { Planet } from '../models/planet.model';
+import { PlanetList } from '../models/planet-list.model';
 
 export interface AppState {
-  readonly planets: Planet[];
+  readonly planets: PlanetList;
   readonly residents: Resident[];
 }

@@ -24,7 +24,7 @@ export class PlanetDetailsComponent implements OnInit {
 
   constructor(private store: Store<AppState>, private route: ActivatedRoute, private domSanitizer: DomSanitizer, public matIconRegistry: MatIconRegistry) {
     this.route.params.subscribe(param => {
-      this.planet$ = this.store.select(state => state.planets.find(p => p.name === param.id));
+      this.planet$ = this.store.select(state => state.planets && state.planets.results.find(p => p.name === param.id));
       this.residents$ = this.store.select(state => state.residents);
     });
 
