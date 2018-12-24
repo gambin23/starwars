@@ -9,8 +9,8 @@
 </div>
 <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 <mat-nav-list>
-  <div *ngFor="let planet of (filteredPlanets | async)">
-    <mat-list-item [routerLink]="['/planet', planet.name]" href="#" style="font-family:Starwars">
+  <div *ngFor="let planet of (filteredPlanets$ | async)">
+    <mat-list-item (click)="loadPersons(planet)" style="font-family:Starwars">
       <a href="#favourite" style="margin-right: 15px">
         <mat-icon style="color: #c0c0c0;">star_border</mat-icon>
       </a>

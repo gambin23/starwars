@@ -1,9 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import Planet from './../../models/Planet';
-import Person from './../../models/Person';
-import { MatIconRegistry } from '@angular/material';
+import { Planet } from '../../models/planet.model';
+import { Resident } from '../../models/resident.model';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../store/app.state';
+import { MatIconRegistry, MatTableDataSource } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import * as _ from 'lodash';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-planet-details',
@@ -12,42 +17,20 @@ import { ActivatedRoute } from '@angular/router';
 })
 
 export class PlanetDetailsComponent implements OnInit {
-  constructor(
-    private route: ActivatedRoute,
-    private domSanitizer: DomSanitizer,
-    public matIconRegistry: MatIconRegistry) {
-    console.log(this.route.params.subscribe(param => console.log(param.id)));
+
+  planet$: Observable<Planet>;
+  residents$: Observable<Resident[]>;
+  columns: string[] = ['name', 'gender', 'height', 'mass'];
+
+  constructor(private store: Store<AppState>, private route: ActivatedRoute, private domSanitizer: DomSanitizer, public matIconRegistry: MatIconRegistry) {
+    this.route.params.subscribe(param => {
+      this.planet$ = this.store.select(state => state.planets.find(p => p.name === param.id));
+      this.residents$ = this.store.select(state => state.residents);
+    });
 
     matIconRegistry.addSvgIcon('male', this.domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/male.svg'));
     matIconRegistry.addSvgIcon('female', this.domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/female.svg'));
   }
-
-  planet: Planet = { name: 'Test' };
-  people: Person[] = [
-    {
-      name: 'Luke Skywalker', height: 172, mass: 77, hair_color: 'blond', skin_color: 'fair',
-      eye_color: 'blue', birth_year: '19BBY', gender: 'male'
-    },
-    {
-      name: 'Maria Agostini', height: 172, mass: 77, hair_color: 'blond', skin_color: 'fair',
-      eye_color: 'blue', birth_year: '19BBY', gender: 'female'
-    },
-    {
-      name: 'Luke Skywalker', height: 172, mass: 77, hair_color: 'blond', skin_color: 'fair',
-      eye_color: 'blue', birth_year: '19BBY', gender: 'male'
-    },
-    {
-      name: 'Luke Skywalker', height: 172, mass: 77, hair_color: 'blond', skin_color: 'fair',
-      eye_color: 'blue', birth_year: '19BBY', gender: 'male'
-    },
-    {
-      name: 'Luke Skywalker', height: 172, mass: 77, hair_color: 'blond', skin_color: 'fair',
-      eye_color: 'blue', birth_year: '19BBY', gender: 'male'
-    }
-  ];
-
-  dataSource: Person[] = this.people;
-  columns: string[] = ['name', 'gender', 'height', 'mass'];
 
   ngOnInit() {
   }

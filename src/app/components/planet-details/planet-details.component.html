@@ -1,24 +1,25 @@
-<div id="planet-details-header">{{planet.name.toUpperCase()}}</div>
-<mat-progress-bar mode="indeterminate"></mat-progress-bar>
-<mat-table [dataSource]="dataSource" class="table">
+<div id="planet-details-header">{{(planet$ | async).name.toUpperCase()}} - {{(planet$ | async).residents.length}} residents</div>
+<mat-progress-bar *ngIf="(planet$ | async).residents.length > (residents$ | async).length" mode="indeterminate"></mat-progress-bar>
+<div id="no-residents" *ngIf="(planet$ | async).residents.length == 0">There are no residents on this planet</div>
+<mat-table [dataSource]="(residents$ | async)" class="table">
   <ng-container matColumnDef="name">
     <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
-    <mat-cell *matCellDef="let person" class="row-head">{{person.name}}</mat-cell>
+    <mat-cell *matCellDef="let resident" class="row-head">{{resident.name}}</mat-cell>
   </ng-container>
   <ng-container matColumnDef="gender">
     <mat-header-cell *matHeaderCellDef></mat-header-cell>
-    <mat-cell *matCellDef="let person" class="row-minor">
-      <mat-icon *ngIf="person.gender == 'male'" svgIcon="male"></mat-icon>
-      <mat-icon *ngIf="person.gender == 'female'" svgIcon="female"></mat-icon>
+    <mat-cell *matCellDef="let resident" class="row-minor">
+      <mat-icon *ngIf="resident.gender == 'male'" svgIcon="male"></mat-icon>
+      <mat-icon *ngIf="resident.gender == 'female'" svgIcon="female"></mat-icon>
     </mat-cell>
   </ng-container>
   <ng-container matColumnDef="height">
     <mat-header-cell *matHeaderCellDef>Height</mat-header-cell>
-    <mat-cell *matCellDef="let person" class="row-minor">{{person.height}} cm</mat-cell>
+    <mat-cell *matCellDef="let resident" class="row-minor">{{resident.height}} cm</mat-cell>
   </ng-container>
   <ng-container matColumnDef="mass">
     <mat-header-cell *matHeaderCellDef>Weight</mat-header-cell>
-    <mat-cell *matCellDef="let person" class="row-minor">{{person.mass}} kg</mat-cell>
+    <mat-cell *matCellDef="let resident" class="row-minor">{{resident.mass}} kg</mat-cell>
   </ng-container>
 
   <mat-row *matRowDef="let row; columns: columns;"></mat-row>

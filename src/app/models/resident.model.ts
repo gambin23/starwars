@@ -1,4 +1,4 @@
-export default class Person {
+export class Resident {
   name: string;
   height: number;
   mass: number;
