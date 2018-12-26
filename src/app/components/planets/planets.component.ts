@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/app.state';
-import { AddPlanets } from '../../store/actions/planet.actions';
+import { AddPlanetList, AddPlanet } from '../../store/actions/planet.actions';
 import { AddResident, ClearResidents } from '../../store/actions/resident.actions';
 import { Planet } from '../../models/planet.model';
 import { PlanetList } from '../../models/planet-list.model';
@@ -26,45 +26,43 @@ export class PlanetsComponent implements OnInit {
   search = new FormControl();
   error: string;
   loading = false;
+  selectedPlanet: Planet;
 
   ngOnInit() {
     this.search.valueChanges.pipe(debounceTime(1500), startWith<string>(''))
       .subscribe(value => {
         this.loading = true;
         this.api.getPlanets(value).subscribe(
-          planets => {
+          planetList => {
             this.loading = false;
             this.error = null;
-            this.store.dispatch(new AddPlanets(planets));
-            this.planetList$ = this.store.select(s => s.planets);
-            this.filteredPlanets$ = this.store.select(s => s.planets && s.planets.results);
+            this.store.dispatch(new AddPlanetList(planetList));
+            planetList.results.map(planet => this.store.dispatch(new AddPlanet(planet)));
+            this.planetList$ = this.store.select(s => s.planets.currentList);
+            this.filteredPlanets$ = this.store.select(s => s.planets && s.planets.currentList.results);
           },
           error => {
             this.loading = false;
             this.error = 'Failed to obtain planets';
           }
         );
-      }).unsubscribe();
+      });
   }
-
-  onLoadPersons(planet: Planet) {
-    this.router.navigate(['/planet', planet.name]);
-    this.store.dispatch(new ClearResidents());
-    planet.residents.map(url => {
-      this.api.getPerson(url).subscribe(p => this.store.dispatch(new AddResident(p)));
-    });
+  onLoadPlanet(planet: Planet) {
+    this.selectedPlanet = planet;
   }
 
   onNextPage() {
     this.loading = true;
     this.planetList$.subscribe(p => {
       this.api.getPlanetsNext(p.next).subscribe(
-        planets => {
+        planetList => {
           this.loading = false;
           this.error = null;
-          this.store.dispatch(new AddPlanets(planets));
-          this.planetList$ = this.store.select(s => s.planets);
-          this.filteredPlanets$ = this.store.select(s => s.planets && s.planets.results);
+          this.store.dispatch(new AddPlanetList(planetList));
+          planetList.results.map(planet => this.store.dispatch(new AddPlanet(planet)));
+          this.planetList$ = this.store.select(s => s.planets.currentList);
+          this.filteredPlanets$ = this.store.select(s => s.planets && s.planets.currentList.results);
         },
         error => {
           this.loading = false;
@@ -78,12 +76,13 @@ export class PlanetsComponent implements OnInit {
     this.loading = true;
     this.planetList$.subscribe(p => {
       this.api.getPlanetsNext(p.previous).subscribe(
-        planets => {
+        planetList => {
           this.loading = false;
           this.error = null;
-          this.store.dispatch(new AddPlanets(planets));
-          this.planetList$ = this.store.select(s => s.planets);
-          this.filteredPlanets$ = this.store.select(s => s.planets && s.planets.results);
+          this.store.dispatch(new AddPlanetList(planetList));
+          planetList.results.map(planet => this.store.dispatch(new AddPlanet(planet)));
+          this.planetList$ = this.store.select(s => s.planets.currentList);
+          this.filteredPlanets$ = this.store.select(s => s.planets && s.planets.currentList.results);
         },
         error => {
           this.loading = false;

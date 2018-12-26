@@ -7,6 +7,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { PlanetReducer } from '../app/store/reducers/planet.reducer';
 import { ResidentReducer } from './store/reducers/resident.reducer';
+import { FavouriteReducer } from './store/reducers/favourite.reducer';
 
 import { LayoutModule } from '@angular/cdk/layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -30,17 +31,23 @@ import {
 } from '@angular/material';
 
 import { ApiService } from '../app/services/api.service';
+import { FavouriteComponent } from './components/favourite/favourite.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    HomeComponent,
     NavigationComponent,
     PlanetDetailsComponent,
     PlanetsComponent,
-    HomeComponent
+    FavouriteComponent
   ],
   imports: [
-    StoreModule.forRoot({ planets: PlanetReducer, residents: ResidentReducer }),
+    StoreModule.forRoot({
+      planets: PlanetReducer,
+      residents: ResidentReducer,
+      favourites: FavouriteReducer
+    }),
     StoreDevtoolsModule.instrument(),
     AppRoutingModule,
     BrowserModule,

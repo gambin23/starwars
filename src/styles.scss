@@ -2,7 +2,7 @@
 @import "~normalize.css/normalize.css";
 @font-face {
     font-family: "STARWARS";
-    src: url("../src/assets/fonts/STARWARS.eot?") format("eot"), url("../src/assets/fonts/STARWARS.woff") format("woff"), url("../src/assets/fonts/STARWARS.ttf") format("truetype"), url("../src/assets/fonts/STARWARS.svg#STARWARS") format("svg");
+    src: url("src/assets/fonts/STARWARS.eot?") format("eot"), url("src/assets/fonts/STARWARS.woff") format("woff"), url("src/assets/fonts/STARWARS.ttf") format("truetype"), url("src/assets/fonts/STARWARS.svg#STARWARS") format("svg");
     font-weight: normal;
     font-style: normal;
 }
@@ -17,12 +17,12 @@ $theme: mat-dark-theme($primary,$accent,$warn);
 $font-primary: "STARWARS";
 
 $dark-gray: #212121;
-$light-gray: #424242;
-$mid-gray: #525252;
+$light-gray: gray;
+$mid-gray: #424242;
 $white: #ffffff;
 
 body {
-    background-color: $light-gray;
+    background-color: $mid-gray;
     color: $white;
 }
 
@@ -57,6 +57,7 @@ body {
 
 .table {
   width: 100%;
+  padding-top: 10px;
   font-family: $font-primary;
 }
 
@@ -80,10 +81,7 @@ body {
   background-color: red;
 }
 
-.favourite {
-  color: mat-color($primary);
+.planet-link {
+  font-family: $font-primary;
 }
 
-.favourite-off {
-  color: #c0c0c0;
-}

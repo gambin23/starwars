@@ -1,8 +1,6 @@
-<div id="planet-details-header">
-  <a href="#favourite" style="margin-left: 8px; float: left;">
-    <mat-icon class="favourite">stars</mat-icon>
-  </a>
-  {{(planet$ | async)?.name.toUpperCase()}} - {{(planet$ | async)?.residents.length}} residents
+<div *ngIf="(planet$ | async) != null" id="planet-details-header">
+  <app-favourite [planet]="planet$ | async">test</app-favourite>
+  {{(planet$ | async).name.toUpperCase()}} - {{(planet$ | async).residents.length}} residents
 </div>
 <mat-progress-bar *ngIf="(planet$ | async)?.residents.length > (residents$ | async)?.length" mode="indeterminate"></mat-progress-bar>
 <div id="no-residents" *ngIf="(planet$ | async)?.residents.length == 0">There are no residents on this planet</div>
