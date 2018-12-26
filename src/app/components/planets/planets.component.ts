@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/app.state';
 import { AddPlanetList, AddPlanet } from '../../store/actions/planet.actions';
-import { AddResident, ClearResidents } from '../../store/actions/resident.actions';
 import { Planet } from '../../models/planet.model';
 import { PlanetList } from '../../models/planet-list.model';
 import { Observable } from 'rxjs';

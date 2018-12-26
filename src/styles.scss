@@ -25,6 +25,9 @@ body {
     background-color: $mid-gray;
     color: $white;
 }
+.mat-sidenav {
+  min-width: 220px;
+}
 
 .header {
     font-family: $font-primary;
@@ -85,3 +88,11 @@ body {
   font-family: $font-primary;
 }
 
+.favourites-header {
+  color:$dark-gray;
+  background-color: mat-color($primary);
+  font-family: $font-primary;
+  padding: 15px;
+  font-size: 18px;
+  cursor: pointer;
+}

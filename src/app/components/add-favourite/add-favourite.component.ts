@@ -23,19 +23,14 @@ export class AddFavouriteComponent implements OnInit {
   }
 
   onAddFavourite() {
-    console.log(this.planet);
     this.store.dispatch(new AddFavourite(this.planet.name));
   }
 
   onRemoveFavourite() {
-    console.log(this.planet);
     this.store.dispatch(new DeleteFavourite(this.planet.name));
   }
 
   isFavourite(): Observable<boolean> {
-    if (this.planet != null) {
       return this.store.select(s => s.favourites).pipe(map(favs => _.has(favs, this.planet.name)));
-    }
-    return of(false);
   }
 }

@@ -1,0 +1,12 @@
+<mat-nav-list style="margin-top: -5px;">
+  <div (click)="toggle()"class="favourites-header">
+    <span *ngIf="(favourites$ | async).length > 0">{{(favourites$ | async).length}}</span>
+    FAVOURITES
+  </div>
+  <div *ngIf="display" >
+    <mat-list-item *ngFor="let planet of favourites$ | async" [routerLink]="['planet', planet.name]" routerLinkActive="active" class="planet-link">
+      <app-add-favourite [planet]="planet" style="margin-right: 15px"></app-add-favourite>
+      {{ planet.name }}
+    </mat-list-item>
+  </div>
+</mat-nav-list>

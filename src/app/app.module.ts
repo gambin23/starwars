@@ -21,6 +21,7 @@ import { HomeComponent } from './components/home/home.component';
 import {
   MatToolbarModule,
   MatButtonModule,
+  MatExpansionModule,
   MatSidenavModule,
   MatIconModule,
   MatListModule,
@@ -32,6 +33,7 @@ import {
 
 import { ApiService } from '../app/services/api.service';
 import { AddFavouriteComponent } from './components/add-favourite/add-favourite.component';
+import { FavouritesComponent } from './components/favourites/favourites.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,8 @@ import { AddFavouriteComponent } from './components/add-favourite/add-favourite.
     NavigationComponent,
     PlanetDetailsComponent,
     PlanetsComponent,
-    AddFavouriteComponent
+    AddFavouriteComponent,
+    FavouritesComponent
   ],
   imports: [
     StoreModule.forRoot({
@@ -58,6 +61,7 @@ import { AddFavouriteComponent } from './components/add-favourite/add-favourite.
     ReactiveFormsModule,
     MatToolbarModule,
     MatButtonModule,
+    MatExpansionModule,
     MatSidenavModule,
     MatIconModule,
     MatListModule,
