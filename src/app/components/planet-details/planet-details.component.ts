@@ -8,9 +8,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import * as _ from 'lodash';
 import { Observable, Subscription } from 'rxjs';
-import { tap } from 'rxjs/operators';
 import { AddResident, ClearResidents } from '../../store/actions/resident.actions';
-import { AddFavourite, DeleteFavourite } from '../../store/actions/favourite.actions';
 import { ApiService } from '../../services/api.service';
 import { from } from 'rxjs';
 
@@ -35,7 +33,7 @@ export class PlanetDetailsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.routeChange = this.route.params.subscribe(param => {
       this.store.dispatch(new ClearResidents());
-      this.planet$ = this.store.select(state => state.planets.planets && state.planets.planets.find(p => p.name === param.id));
+      this.planet$ = this.store.select(state => state.planets.planets.find(p => p.name === param.id));
 
       this.planet$.subscribe(planet => {
         if (planet != null) {
@@ -43,7 +41,7 @@ export class PlanetDetailsComponent implements OnInit, OnDestroy {
             this.api.getPerson(url).subscribe(p => this.store.dispatch(new AddResident(p)));
           });
         }
-      });
+      }).unsubscribe();
 
       this.residents$ = this.store.select(state => state.residents && state.residents);
     });

@@ -26,7 +26,6 @@ export class PlanetsComponent implements OnInit {
   search = new FormControl();
   error: string;
   loading = false;
-  selectedPlanet: Planet;
 
   ngOnInit() {
     this.search.valueChanges.pipe(debounceTime(1500), startWith<string>(''))
@@ -47,9 +46,6 @@ export class PlanetsComponent implements OnInit {
           }
         );
       });
-  }
-  onLoadPlanet(planet: Planet) {
-    this.selectedPlanet = planet;
   }
 
   onNextPage() {

@@ -8,12 +8,12 @@ import { map } from 'rxjs/operators';
 import * as _ from 'lodash';
 
 @Component({
-  selector: 'app-favourite',
-  templateUrl: './favourite.component.html',
-  styleUrls: ['./favourite.component.scss']
+  selector: 'app-add-favourite',
+  templateUrl: './add-favourite.component.html',
+  styleUrls: ['./add-favourite.component.scss']
 })
 
-export class FavouriteComponent implements OnInit {
+export class AddFavouriteComponent implements OnInit {
 
   @Input() planet: Planet;
 

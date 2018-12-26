@@ -31,7 +31,7 @@ import {
 } from '@angular/material';
 
 import { ApiService } from '../app/services/api.service';
-import { FavouriteComponent } from './components/favourite/favourite.component';
+import { AddFavouriteComponent } from './components/add-favourite/add-favourite.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +40,7 @@ import { FavouriteComponent } from './components/favourite/favourite.component';
     NavigationComponent,
     PlanetDetailsComponent,
     PlanetsComponent,
-    FavouriteComponent
+    AddFavouriteComponent
   ],
   imports: [
     StoreModule.forRoot({

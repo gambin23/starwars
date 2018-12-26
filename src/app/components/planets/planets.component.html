@@ -11,8 +11,8 @@
 <div *ngIf="error != null" class="error">{{error}}</div>
 <mat-nav-list>
   <div *ngFor="let planet of filteredPlanets$ | async">
-    <mat-list-item (click)="onLoadPlanet(planet)" [routerLink]="['planet', planet.name]" routerLinkActive="active" class="planet-link">
-      <app-favourite [planet]="planet" style="margin-right: 15px"></app-favourite>
+    <mat-list-item [routerLink]="['planet', planet.name]" routerLinkActive="active" class="planet-link">
+      <app-add-favourite [planet]="planet" style="margin-right: 15px"></app-add-favourite>
       {{ planet.name }}
     </mat-list-item>
   </div>
