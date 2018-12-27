@@ -10,6 +10,6 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class NavigationComponent {
 
   constructor(private domSanitizer: DomSanitizer, public matIconRegistry: MatIconRegistry) {
-    matIconRegistry.addSvgIcon('r2d2', domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/r2d2.svg'));
+    matIconRegistry.addSvgIcon('r2d2', this.domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/r2d2.svg'));
   }
 }

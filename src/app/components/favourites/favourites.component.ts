@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Planet } from '../../models/planet.model';
-import { Store } from '@ngrx/store';
-import { AppState } from '../../store/app.state';
+import { FavouriteService } from '../../services/favourite.service';
 import { Observable } from 'rxjs';
+
 @Component({
   selector: 'app-favourites',
   templateUrl: './favourites.component.html',
@@ -12,10 +12,11 @@ export class FavouritesComponent implements OnInit {
 
   favourites$: Observable<Planet[]>;
   display = true;
-  constructor(private store: Store<AppState>) { }
+
+  constructor(private favouriteService: FavouriteService) { }
 
   ngOnInit() {
-    this.favourites$ = this.store.select(s => s.planets.planets.filter(p => s.favourites.includes(p.name)));
+    this.favourites$ = this.favouriteService.getAll();
   }
 
   toggle() {

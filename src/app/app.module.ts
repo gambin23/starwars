@@ -13,11 +13,20 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { ApiService } from '../app/services/api.service';
+import { PlanetService } from './services/planet.service';
+import { ResidentService } from './services/resident.service';
+import { FavouriteService } from './services/favourite.service';
+
+
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { PlanetDetailsComponent } from './components/planet-details/planet-details.component';
 import { PlanetsComponent } from './components/planets/planets.component';
 import { HomeComponent } from './components/home/home.component';
+import { AddFavouriteComponent } from './components/add-favourite/add-favourite.component';
+import { FavouritesComponent } from './components/favourites/favourites.component';
+
 import {
   MatToolbarModule,
   MatButtonModule,
@@ -31,9 +40,6 @@ import {
   MatProgressBarModule
 } from '@angular/material';
 
-import { ApiService } from '../app/services/api.service';
-import { AddFavouriteComponent } from './components/add-favourite/add-favourite.component';
-import { FavouritesComponent } from './components/favourites/favourites.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +76,12 @@ import { FavouritesComponent } from './components/favourites/favourites.componen
     MatProgressBarModule,
     MatTableModule
   ],
-  providers: [ApiService],
+  providers: [
+    ApiService,
+    PlanetService,
+    ResidentService,
+    FavouriteService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

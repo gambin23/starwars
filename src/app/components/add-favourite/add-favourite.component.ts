@@ -1,9 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Planet } from 'src/app/models/planet.model';
-import { Store } from '@ngrx/store';
-import { AppState } from '../../store/app.state';
-import { AddFavourite, DeleteFavourite } from '../../store/actions/favourite.actions';
-import { Observable, of } from 'rxjs';
+import { Planet } from '../../models/planet.model';
+import { FavouriteService } from '../../services/favourite.service';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as _ from 'lodash';
 
@@ -17,20 +15,20 @@ export class AddFavouriteComponent implements OnInit {
 
   @Input() planet: Planet;
 
-  constructor(private store: Store<AppState>) { }
+  constructor(private favouriteService: FavouriteService) { }
 
   ngOnInit() {
   }
 
   onAddFavourite() {
-    this.store.dispatch(new AddFavourite(this.planet.name));
+    this.favouriteService.add(this.planet);
   }
 
   onRemoveFavourite() {
-    this.store.dispatch(new DeleteFavourite(this.planet.name));
+    this.favouriteService.delete(this.planet);
   }
 
   isFavourite(): Observable<boolean> {
-      return this.store.select(s => s.favourites).pipe(map(favs => _.has(favs, this.planet.name)));
+    return this.favouriteService.getAll().pipe(map(favs => _.has(favs, this.planet.name)));
   }
 }

@@ -10,7 +10,7 @@
 <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
 <div *ngIf="error != null" class="error">{{error}}</div>
 <mat-nav-list>
-  <div *ngFor="let planet of filteredPlanets$ | async">
+  <div *ngFor="let planet of (planetList$ | async)?.results">
     <mat-list-item [routerLink]="['planet', planet.name]" routerLinkActive="active" class="planet-link">
       <app-add-favourite [planet]="planet" style="margin-right: 15px"></app-add-favourite>
       {{ planet.name }}

@@ -29,7 +29,7 @@ export class ApiService {
     return this.client.get<PlanetList>(url);
   }
 
-  public getPerson(url: string) {
+  public getResident(url: string) {
     return this.client.get<Resident>(url);
   }
 }
