@@ -4,7 +4,7 @@
     FAVOURITES
   </div>
   <div *ngIf="display" >
-    <mat-list-item *ngFor="let planet of favourites$ | async" [routerLink]="['planet', planet.name]" routerLinkActive="active" class="planet-link">
+    <mat-list-item *ngFor="let planet of favourites$ | async" [routerLink]="[planet.name]" routerLinkActive="active" class="planet-link">
       <app-add-favourite [planet]="planet" style="margin-right: 15px"></app-add-favourite>
       {{ planet.name }}
     </mat-list-item>

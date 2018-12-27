@@ -1,20 +1,20 @@
-<mat-toolbar style="background-color: yellow">
-  <mat-form-field style="color: black; font-family:Starwars;" [floatLabel]="'never'">
-    <input [formControl]="search" matInput placeholder="Search..." />
-  </mat-form-field>
-</mat-toolbar>
-<div style="background-color: #212121;">
-  <button mat-button [disabled]="(planetList$ | async)?.previous == null" (click)="onPreviousPage()" class="button-nav">Previous</button>
-  <button mat-button [disabled]="(planetList$ | async)?.next == null" (click)="onNextPage()" class="button-nav">Next</button>
-</div>
-<mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
-<div *ngIf="error != null" class="error">{{error}}</div>
-<mat-nav-list>
-  <div *ngFor="let planet of (planetList$ | async)?.results">
-    <mat-list-item [routerLink]="['planet', planet.name]" routerLinkActive="active" class="planet-link">
-      <app-add-favourite [planet]="planet" style="margin-right: 15px"></app-add-favourite>
-      {{ planet.name }}
-    </mat-list-item>
-  </div>
-</mat-nav-list>
-<app-favourites></app-favourites>
+<mat-sidenav-container class="sidenav-container">
+
+  <mat-sidenav #drawer fixedInViewport="true" [mode]="'side'" [opened]="true">
+    <app-planet-list></app-planet-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+        <mat-icon svgIcon="r2d2"></mat-icon>
+      </button>
+      <span class="header">STARWARS</span>
+      <button routerLink="/login"type="button" aria-label="Logout" mat-icon-button>
+        <mat-icon svgIcon="logout"></mat-icon>
+      </button>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

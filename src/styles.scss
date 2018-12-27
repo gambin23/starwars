@@ -21,10 +21,11 @@ $light-gray: gray;
 $mid-gray: #424242;
 $white: #ffffff;
 
-body {
-    background-color: $mid-gray;
-    color: $white;
+body, html {
+  background-color: $mid-gray;
+    min-height:100%;
 }
+
 .mat-sidenav {
   min-width: 220px;
 }

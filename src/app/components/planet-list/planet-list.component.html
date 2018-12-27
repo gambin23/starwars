@@ -1,0 +1,20 @@
+<mat-toolbar style="background-color: yellow">
+  <mat-form-field style="color: black; font-family:Starwars;" [floatLabel]="'never'">
+    <input [formControl]="search" matInput placeholder="Search..." />
+  </mat-form-field>
+</mat-toolbar>
+<div style="background-color: #212121;">
+  <button mat-button [disabled]="(planetList$ | async)?.previous == null" (click)="onPreviousPage()" class="button-nav">Previous</button>
+  <button mat-button [disabled]="(planetList$ | async)?.next == null" (click)="onNextPage()" class="button-nav">Next</button>
+</div>
+<mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+<div *ngIf="error != null" class="error">{{error}}</div>
+<mat-nav-list>
+  <div *ngFor="let planet of (planetList$ | async)?.results">
+    <mat-list-item [routerLink]="[planet.name]" routerLinkActive="active" class="planet-link">
+      <app-add-favourite [planet]="planet" style="margin-right: 15px"></app-add-favourite>
+      {{ planet.name }}
+    </mat-list-item>
+  </div>
+</mat-nav-list>
+<app-favourites *ngIf="(planetList$ | async)?.count > 0"></app-favourites>

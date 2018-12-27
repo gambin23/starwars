@@ -23,7 +23,7 @@ import { AppComponent } from './app.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { PlanetDetailsComponent } from './components/planet-details/planet-details.component';
 import { PlanetsComponent } from './components/planets/planets.component';
-import { HomeComponent } from './components/home/home.component';
+import { LoginComponent } from './components/login/login.component';
 import { AddFavouriteComponent } from './components/add-favourite/add-favourite.component';
 import { FavouritesComponent } from './components/favourites/favourites.component';
 
@@ -39,17 +39,19 @@ import {
   MatTableModule,
   MatProgressBarModule
 } from '@angular/material';
+import { PlanetListComponent } from './components/planet-list/planet-list.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
+    LoginComponent,
     NavigationComponent,
     PlanetDetailsComponent,
     PlanetsComponent,
     AddFavouriteComponent,
-    FavouritesComponent
+    FavouritesComponent,
+    PlanetListComponent
   ],
   imports: [
     StoreModule.forRoot({

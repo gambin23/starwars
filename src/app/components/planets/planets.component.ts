@@ -1,12 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Planet } from '../../models/planet.model';
-import { PlanetList } from '../../models/planet-list.model';
-import { PlanetService } from '../../services/planet.service';
-import { Observable } from 'rxjs';
-import { FormControl } from '@angular/forms';
-import { debounceTime, startWith, map, tap } from 'rxjs/operators';
-import { ApiService } from '../../services/api.service';
+import { MatIconRegistry } from '@angular/material';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-planets',
@@ -16,53 +10,14 @@ import { ApiService } from '../../services/api.service';
 export class PlanetsComponent implements OnInit {
 
   constructor(
-    private planetService: PlanetService,
-    private router: Router, private api: ApiService
-  ) { }
+    private domSanitizer: DomSanitizer,
+    public matIconRegistry: MatIconRegistry
+  ) {
+    matIconRegistry.addSvgIcon('r2d2', this.domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/r2d2.svg'));
+    matIconRegistry.addSvgIcon('logout', this.domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/logout.svg'));
 
-  planetList$: Observable<PlanetList>;
-  search = new FormControl();
-  error: string;
-  loading = false;
+  }
 
   ngOnInit() {
-    this.search.valueChanges.pipe(debounceTime(1500), startWith(''))
-      .subscribe(value => {
-        this.loading = true;
-        this.error = null;
-        this.loadPlanets(this.api.getPlanets(value));
-      });
-  }
-
-  onNextPage() {
-    this.planetList$.subscribe(p => {
-      this.loading = true;
-      this.error = null;
-      this.loadPlanets(this.api.getPlanetsNext(p.next));
-    }).unsubscribe();
-
-  }
-
-  onPreviousPage() {
-    this.planetList$.subscribe(p => {
-      this.loading = true;
-      this.error = null;
-      this.loadPlanets(this.api.getPlanetsPrevious(p.previous));
-    }).unsubscribe();
-
-  }
-
-  loadPlanets(planets: Observable<PlanetList>) {
-    planets.subscribe(
-      planetList => {
-        this.loading = false;
-        this.planetService.addList(planetList);
-        planetList.results.map(planet => this.planetService.add(planet));
-        this.planetList$ = this.planetService.getCurrentList();
-      },
-      error => {
-        this.loading = false;
-        this.error = 'Failed to obtain planets';
-      });
   }
 }
