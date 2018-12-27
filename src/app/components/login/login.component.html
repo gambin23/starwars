@@ -1,17 +1,20 @@
 <div class="background">
-  <div class="form-margin">
-    <div class="form">
+  <div *ngIf="!loading" class="form-margin">
+    <form (ngSubmit)="onLogin()" [formGroup]="form" class="form">
       <mat-toolbar color="primary" id="header">STARWARS</mat-toolbar>
       <div id="error">{{error}}</div>
       <mat-form-field class="input">
-        <input matInput placeholder="USERNAME">
+        <input matInput [formControl]="username" placeholder="USERNAME">
       </mat-form-field>
       <mat-form-field class="input">
-        <input matInput placeholder="PASSWORD">
+        <input matInput [formControl]="password" type="password" placeholder="PASSWORD">
       </mat-form-field>
       <div id="btn-container">
-        <button mat-button id="btn-login" routerLink="/planets">LOGIN</button>
+        <button mat-button [disabled]="form.invalid" id="btn-login">LOGIN</button>
       </div>
-    </div>
+    </form>
+  </div>
+  <div *ngIf="loading" id="loader">
+    <mat-icon svgIcon="r2d2" style="height: 100px; width: 100px;"></mat-icon>
   </div>
 </div>

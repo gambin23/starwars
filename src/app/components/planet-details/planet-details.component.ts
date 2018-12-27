@@ -26,7 +26,8 @@ export class PlanetDetailsComponent implements OnInit, OnDestroy {
     private api: ApiService,
     private planetService: PlanetService,
     private residentService: ResidentService,
-    private route: ActivatedRoute, private domSanitizer: DomSanitizer,
+    private route: ActivatedRoute,
+    private domSanitizer: DomSanitizer,
     public matIconRegistry: MatIconRegistry
   ) {
     matIconRegistry.addSvgIcon('male', this.domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/male.svg'));

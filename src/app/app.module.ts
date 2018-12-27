@@ -13,6 +13,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { AuthService } from '../app/services/auth.service';
 import { ApiService } from '../app/services/api.service';
 import { PlanetService } from './services/planet.service';
 import { ResidentService } from './services/resident.service';
@@ -79,6 +80,7 @@ import { PlanetListComponent } from './components/planet-list/planet-list.compon
     MatTableModule
   ],
   providers: [
+    AuthService,
     ApiService,
     PlanetService,
     ResidentService,
