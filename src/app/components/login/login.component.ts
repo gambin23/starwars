@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
   }
 
   authenticate(user: User) {
-    this.authService.authenticate(user).subscribe(
+    this.authService.login(user).subscribe(
       foundUser => { this.router.navigate(['planets']); },
       error => {
         this.error = error;

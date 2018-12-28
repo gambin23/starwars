@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 import { MatIconRegistry } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -10,6 +12,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class PlanetsComponent implements OnInit {
 
   constructor(
+    private authService: AuthService,
+    private router: Router,
     private domSanitizer: DomSanitizer,
     public matIconRegistry: MatIconRegistry
   ) {
@@ -19,5 +23,10 @@ export class PlanetsComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 }

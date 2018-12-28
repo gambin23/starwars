@@ -8,17 +8,18 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { PlanetReducer } from '../app/store/reducers/planet.reducer';
 import { ResidentReducer } from './store/reducers/resident.reducer';
 import { FavouriteReducer } from './store/reducers/favourite.reducer';
+import { UserReducer } from './store/reducers/user.reducer';
 
 import { LayoutModule } from '@angular/cdk/layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AuthService } from '../app/services/auth.service';
+import { AuthGuard } from '../app/services/auth-guard.service';
 import { ApiService } from '../app/services/api.service';
 import { PlanetService } from './services/planet.service';
 import { ResidentService } from './services/resident.service';
 import { FavouriteService } from './services/favourite.service';
-
 
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
@@ -58,7 +59,8 @@ import { PlanetListComponent } from './components/planet-list/planet-list.compon
     StoreModule.forRoot({
       planets: PlanetReducer,
       residents: ResidentReducer,
-      favourites: FavouriteReducer
+      favourites: FavouriteReducer,
+      user: UserReducer
     }),
     StoreDevtoolsModule.instrument(),
     AppRoutingModule,
@@ -81,6 +83,7 @@ import { PlanetListComponent } from './components/planet-list/planet-list.compon
   ],
   providers: [
     AuthService,
+    AuthGuard,
     ApiService,
     PlanetService,
     ResidentService,

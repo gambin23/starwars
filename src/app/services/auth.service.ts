@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { User } from '../models/user.model';
+import { AddUser, DeleteUser } from '../store/actions/user.actions';
+import { Store } from '@ngrx/store';
+import { AppState } from '../store/app.state';
 import { Observable, of, throwError } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
@@ -9,17 +12,18 @@ import { delay } from 'rxjs/operators';
 
 export class AuthService {
 
-  constructor() {
+  constructor(private store: Store<AppState>) {
   }
 
   private users: User[] = [{ username: 'han', password: 'solo' }];
 
-  public authenticate(user: User): Observable<User> {
+  public login(user: User): Observable<User> {
     const foundUser = this.users.find(u => u.username === user.username);
 
     if (foundUser != null) {
       if (foundUser.password === user.password) {
-        return of(foundUser).pipe(delay(2000));
+        this.store.dispatch(new AddUser(user));
+        return of(foundUser).pipe(delay(1000));
       } else {
         return throwError('Invalid password.');
       }
@@ -28,4 +32,11 @@ export class AuthService {
     }
   }
 
+  public logout() {
+    this.store.dispatch(new DeleteUser());
+  }
+
+  public getUser(): Observable<User> {
+    return this.store.select(s => s.user);
+  }
 }
