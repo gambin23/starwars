@@ -1,24 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../../models/user.model';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material';
 import { AuthService } from 'src/app/services/auth.service';
+import { interval, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 
-  hcCredentials: User = { username: 'han', password: 'solo' };
   loading = false;
   error = '';
+  authenticateSubscription: Subscription;
+
   username = new FormControl('', [Validators.required]);
   password = new FormControl('', [Validators.required]);
-
   form = new FormGroup({
     username: this.username,
     password: this.password,
@@ -43,13 +44,17 @@ export class LoginComponent implements OnInit {
   }
 
   authenticate(user: User) {
-    this.authService.login(user).subscribe(
+    this.authenticateSubscription = this.authService.login(user).subscribe(
       foundUser => { this.router.navigate(['planets']); },
       error => {
         this.error = error;
         this.loading = false;
       }
     );
+  }
+
+  ngOnDestroy() {
+    this.authenticateSubscription.unsubscribe();
   }
 
 }

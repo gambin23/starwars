@@ -16,6 +16,10 @@ export class ResidentService {
     return this.store.select(s => s.residents);
   }
 
+  public filterByPlanet(planet: string): Observable<Resident[]> {
+    return this.store.select(s => s.residents.filter(r => r.planet === planet));
+  }
+
   public add(resident: Resident) {
     this.store.dispatch(new AddResident(resident));
   }

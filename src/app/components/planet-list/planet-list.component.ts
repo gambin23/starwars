@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Planet } from '../../models/planet.model';
 import { PlanetList } from '../../models/planet-list.model';
 import { PlanetService } from '../../services/planet.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { FormControl } from '@angular/forms';
-import { debounceTime, startWith, map, tap } from 'rxjs/operators';
+import { debounceTime, startWith } from 'rxjs/operators';
 import { ApiService } from '../../services/api.service';
 
 @Component({
@@ -12,9 +12,10 @@ import { ApiService } from '../../services/api.service';
   templateUrl: './planet-list.component.html',
   styleUrls: ['./planet-list.component.scss']
 })
-export class PlanetListComponent implements OnInit {
+export class PlanetListComponent implements OnInit, OnDestroy {
 
   planetList$: Observable<PlanetList>;
+  valueChange: Subscription;
   search = new FormControl();
   error: string;
   loading = false;
@@ -26,18 +27,18 @@ export class PlanetListComponent implements OnInit {
 
 
   ngOnInit() {
-    this.search.valueChanges.pipe(debounceTime(1500), startWith(''))
+    this.valueChange = this.search.valueChanges.pipe(debounceTime(1500), startWith(''))
       .subscribe(value => {
-        this.loading = true;
-        this.error = null;
         this.loadPlanets(this.api.getPlanets(value));
       });
   }
 
+  ngOnDestroy() {
+    this.valueChange.unsubscribe();
+  }
+
   onNextPage() {
     this.planetList$.subscribe(p => {
-      this.loading = true;
-      this.error = null;
       this.loadPlanets(this.api.getPlanetsNext(p.next));
     }).unsubscribe();
 
@@ -45,14 +46,14 @@ export class PlanetListComponent implements OnInit {
 
   onPreviousPage() {
     this.planetList$.subscribe(p => {
-      this.loading = true;
-      this.error = null;
       this.loadPlanets(this.api.getPlanetsPrevious(p.previous));
     }).unsubscribe();
 
   }
 
   loadPlanets(planets: Observable<PlanetList>) {
+    this.loading = true;
+    this.error = null;
     planets.subscribe(
       planetList => {
         this.loading = false;

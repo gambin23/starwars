@@ -7,4 +7,5 @@ export class Resident {
   eye_color: string;
   birth_year: string;
   gender: string;
+  planet: string;
 }

@@ -18,6 +18,7 @@ import { ApiService } from '../../services/api.service';
 
 export class PlanetDetailsComponent implements OnInit, OnDestroy {
   routeChange: Subscription;
+  planetChange: Subscription;
   planet$: Observable<Planet>;
   residents$: Observable<Resident[]>;
   columns: string[] = ['name', 'gender', 'height', 'mass'];
@@ -36,27 +37,27 @@ export class PlanetDetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.routeChange = this.route.params.subscribe(param => {
-      this.loadDetails(param.id);
+      this.planet$ = this.planetService.getById(param.id);
+
+      this.planetChange = this.planet$.subscribe(planet => {
+        if (planet != null) {
+          this.residentService.removeAll();
+          planet.residents.map(url => {
+            this.api.getResident(url).subscribe(r => {
+              r.planet = param.id;
+              this.residentService.add(r);
+            });
+          });
+        }
+      });
+
+      this.residents$ = this.residentService.filterByPlanet(param.id);
     });
   }
 
   ngOnDestroy() {
     this.routeChange.unsubscribe();
-  }
-
-  loadDetails(name: string) {
-    this.planet$ = this.planetService.getById(name);
-
-    this.planet$.subscribe(planet => {
-      if (planet != null) {
-        this.residentService.removeAll();
-        planet.residents.map(url => {
-          this.api.getResident(url).subscribe(r => this.residentService.add(r));
-        });
-      }
-    });
-
-    this.residents$ = this.residentService.getAll();
+    this.planetChange.unsubscribe();
   }
 
 }

@@ -1,6 +1,6 @@
-<a *ngIf="!(isFavourite() | async)" (click)="onAddFavourite()" class="fav-off favourite">
+<a *ngIf="(isFavourite() | async) == null" (click)="onAddFavourite()" class="fav-off favourite">
   <mat-icon>star_border</mat-icon>
 </a>
-<a *ngIf="(isFavourite() | async)" (click)="onRemoveFavourite()" class="fav favourite">
+<a *ngIf="(isFavourite() | async) != null" (click)="onRemoveFavourite()" class="fav favourite">
   <mat-icon>stars</mat-icon>
 </a>

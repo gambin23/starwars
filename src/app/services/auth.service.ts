@@ -3,8 +3,7 @@ import { User } from '../models/user.model';
 import { AddUser, DeleteUser } from '../store/actions/user.actions';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/app.state';
-import { Observable, of, throwError } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { Observable, Observer } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -20,16 +19,20 @@ export class AuthService {
   public login(user: User): Observable<User> {
     const foundUser = this.users.find(u => u.username === user.username);
 
-    if (foundUser != null) {
-      if (foundUser.password === user.password) {
-        this.store.dispatch(new AddUser(user));
-        return of(foundUser).pipe(delay(1000));
-      } else {
-        return throwError('Invalid password.');
-      }
-    } else {
-      return throwError('Invalid username.');
-    }
+    return Observable.create((observer: Observer<User>) => {
+      setTimeout(() => {
+        if (foundUser != null) {
+          if (foundUser.password === user.password) {
+            this.store.dispatch(new AddUser(user));
+            observer.next(foundUser);
+          } else {
+            observer.error('Invalid password.');
+          }
+        } else {
+          observer.error('Invalid username.');
+        }
+      }, 2000);
+    });
   }
 
   public logout() {

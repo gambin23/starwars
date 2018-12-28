@@ -9,7 +9,8 @@ export function FavouriteReducer(state: string[] = initialState, action: Favouri
     case FavouriteActions.ADD_FAVOURITE:
       return [...state, action.payload];
     case FavouriteActions.DELETE_FAVOURITE:
-      return _.omit(state, action.payload);
+      const index = state.indexOf(action.payload);
+      return [...state.slice(0, index), ...state.slice(index + 1)];
     default:
       return state;
   }
