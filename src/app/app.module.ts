@@ -22,7 +22,6 @@ import { FavouriteService } from './services/favourite.service';
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { PlanetDetailsComponent } from './components/planet-details/planet-details.component';
-import { PlanetsComponent } from './components/planets/planets.component';
 import { LoginComponent } from './components/login/login.component';
 import { AddFavouriteComponent } from './components/add-favourite/add-favourite.component';
 import { FavouritesComponent } from './components/favourites/favourites.component';
@@ -50,7 +49,6 @@ import {
     LoginComponent,
     NavigationComponent,
     PlanetDetailsComponent,
-    PlanetsComponent,
     AddFavouriteComponent,
     FavouritesComponent,
     PlanetListComponent,
