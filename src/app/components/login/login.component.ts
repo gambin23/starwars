@@ -2,10 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../../models/user.model';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { DomSanitizer } from '@angular/platform-browser';
-import { MatIconRegistry } from '@angular/material';
 import { AuthService } from 'src/app/services/auth.service';
-import { interval, Subscription } from 'rxjs';
+import {Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -28,10 +26,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private domSanitizer: DomSanitizer,
-    public matIconRegistry: MatIconRegistry
   ) {
-    matIconRegistry.addSvgIcon('r2d2', this.domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/r2d2.svg'));
   }
 
   ngOnInit() {

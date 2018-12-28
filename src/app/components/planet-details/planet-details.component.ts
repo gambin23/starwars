@@ -3,8 +3,6 @@ import { Planet } from '../../models/planet.model';
 import { Resident } from '../../models/resident.model';
 import { PlanetService } from '../../services/planet.service';
 import { ResidentService } from '../../services/resident.service';
-import { MatIconRegistry, MatTableDataSource } from '@angular/material';
-import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import * as _ from 'lodash';
 import { Observable, Subscription } from 'rxjs';
@@ -28,11 +26,7 @@ export class PlanetDetailsComponent implements OnInit, OnDestroy {
     private planetService: PlanetService,
     private residentService: ResidentService,
     private route: ActivatedRoute,
-    private domSanitizer: DomSanitizer,
-    public matIconRegistry: MatIconRegistry
   ) {
-    matIconRegistry.addSvgIcon('male', this.domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/male.svg'));
-    matIconRegistry.addSvgIcon('female', this.domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/female.svg'));
   }
 
   ngOnInit() {

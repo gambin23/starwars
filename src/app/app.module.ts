@@ -20,7 +20,6 @@ import { ApiService } from '../app/services/api.service';
 import { PlanetService } from './services/planet.service';
 import { ResidentService } from './services/resident.service';
 import { FavouriteService } from './services/favourite.service';
-
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { PlanetDetailsComponent } from './components/planet-details/planet-details.component';
@@ -87,7 +86,7 @@ import { PlanetListComponent } from './components/planet-list/planet-list.compon
     ApiService,
     PlanetService,
     ResidentService,
-    FavouriteService
+    FavouriteService,
   ],
   bootstrap: [AppComponent]
 })
