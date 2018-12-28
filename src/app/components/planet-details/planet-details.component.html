@@ -1,6 +1,6 @@
 <div *ngIf="(planet$ | async) != null" id="planet-details-header">
-  <app-add-favourite [planet]="planet$ | async">test</app-add-favourite>
-  {{(planet$ | async).name.toUpperCase()}} - {{(planet$ | async).residents.length}} residents
+  <app-add-favourite [planet]="planet$ | async"></app-add-favourite>
+  {{(planet$ | async).name | uppercase}} - {{(planet$ | async).residents.length}} residents
 </div>
 <mat-progress-bar *ngIf="(planet$ | async)?.residents.length > (residents$ | async)?.length" mode="indeterminate"></mat-progress-bar>
 <div id="no-residents" *ngIf="(planet$ | async)?.residents.length == 0">There are no residents on this planet</div>
@@ -18,11 +18,11 @@
   </ng-container>
   <ng-container matColumnDef="height">
     <mat-header-cell *matHeaderCellDef>Height</mat-header-cell>
-    <mat-cell *matCellDef="let resident" class="row-minor">{{resident.height}} cm</mat-cell>
+    <mat-cell *matCellDef="let resident" class="row-minor">{{resident.height | na}} cm</mat-cell>
   </ng-container>
   <ng-container matColumnDef="mass">
     <mat-header-cell *matHeaderCellDef>Weight</mat-header-cell>
-    <mat-cell *matCellDef="let resident" class="row-minor">{{resident.mass}} kg</mat-cell>
+    <mat-cell *matCellDef="let resident" class="row-minor">{{resident.mass | na}} kg</mat-cell>
   </ng-container>
 
   <mat-row *matRowDef="let row; columns: columns;"></mat-row>
