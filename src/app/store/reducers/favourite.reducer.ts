@@ -1,9 +1,8 @@
 import * as FavouriteActions from '../actions/favourite.actions';
 import * as _ from 'lodash';
+import { AppState } from '../app.state';
 
-const initialState: string[] = [];
-
-export function FavouriteReducer(state: string[] = initialState, action: FavouriteActions.Actions) {
+export function FavouriteReducer(state = AppState.favourites, action: FavouriteActions.Actions) {
 
   switch (action.type) {
     case FavouriteActions.ADD_FAVOURITE:

@@ -1,14 +1,10 @@
+import { AppState } from '../app.state';
 import { PlanetList } from '../../models/planet-list.model';
 import { Planet } from '../../models/planet.model';
 import * as PlanetActions from '../actions/planet.actions';
 import * as _ from 'lodash';
-const initialState: PlanetState = {
-  currentList: null,
-  planets: []
-};
 
-
-export function PlanetReducer(state: PlanetState = initialState, action: PlanetActions.Actions) {
+export function PlanetReducer(state = AppState.planets, action: PlanetActions.Actions) {
 
   switch (action.type) {
     case PlanetActions.ADD_PLANETLIST:

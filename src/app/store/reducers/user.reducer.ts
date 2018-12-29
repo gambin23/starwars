@@ -1,10 +1,9 @@
+import { AppState } from '../app.state';
 import * as UserActions from '../actions/user.actions';
-import {User} from '../../models/user.model';
+import { User } from '../../models/user.model';
 import * as _ from 'lodash';
 
-const initialState: User = null;
-
-export function UserReducer(state: User = initialState, action: UserActions.Actions) {
+export function UserReducer(state = AppState.user, action: UserActions.Actions) {
 
   switch (action.type) {
     case UserActions.ADD_USER:

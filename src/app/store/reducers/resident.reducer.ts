@@ -1,9 +1,8 @@
+import { AppState } from '../app.state';
 import { Resident } from '../../models/resident.model';
 import * as ResidentActions from '../actions/resident.actions';
 
-const initialState: Resident[] = [];
-
-export function ResidentReducer(state: Resident[] = initialState, action: ResidentActions.Actions) {
+export function ResidentReducer(state = AppState.residents, action: ResidentActions.Actions) {
 
   switch (action.type) {
     case ResidentActions.ADD_RESIDENT:

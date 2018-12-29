@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AppState } from '../store/app.state';
+import { IAppState } from '../store/app.state';
 import { Observable } from 'rxjs';
 import { Planet } from '../models/planet.model';
 import { AddFavourite, DeleteFavourite } from '../store/actions/favourite.actions';
@@ -11,7 +11,7 @@ import * as _ from 'lodash';
 })
 export class FavouriteService {
 
-  constructor(private store: Store<AppState>) { }
+  constructor(private store: Store<IAppState>) { }
 
   public getAll(): Observable<Planet[]> {
     return this.store.select(s => _.sortBy<Planet>(s.planets.planets.filter(p => s.favourites.includes(p.name)), p => p.name));

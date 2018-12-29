@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { User } from '../models/user.model';
 import { AddUser, DeleteUser } from '../store/actions/user.actions';
 import { Store } from '@ngrx/store';
-import { AppState } from '../store/app.state';
+import { IAppState } from '../store/app.state';
 import { Observable, Observer } from 'rxjs';
 
 @Injectable({
@@ -11,7 +11,7 @@ import { Observable, Observer } from 'rxjs';
 
 export class AuthService {
 
-  constructor(private store: Store<AppState>) {
+  constructor(private store: Store<IAppState>) {
   }
 
   private users: User[] = [{ username: 'han', password: 'solo' }];

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AddPlanetList, AddPlanet } from '../store/actions/planet.actions';
-import { AppState } from '../store/app.state';
+import { IAppState } from '../store/app.state';
 import { Planet } from '../models/planet.model';
 import { PlanetList } from '../models/planet-list.model';
 import { Observable } from 'rxjs';
@@ -12,7 +12,7 @@ import * as _ from 'lodash';
 })
 export class PlanetService {
 
-  constructor(private store: Store<AppState>) { }
+  constructor(private store: Store<IAppState>) { }
 
   public getAll(): Observable<Planet[]> {
     return this.store.select(s => _.sortBy<Planet>(s.planets.planets, p => p.name));
