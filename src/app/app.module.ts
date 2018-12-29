@@ -5,20 +5,18 @@ import { HttpClientModule } from '@angular/common/http';
 import { LayoutModule } from '@angular/cdk/layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {ThemeModule} from './theme.module';
+import { ThemeModule } from './theme.module';
 
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { PlanetReducer } from './store/reducers/planet.reducer';
-import { ResidentReducer } from './store/reducers/resident.reducer';
-import { FavouriteReducer } from './store/reducers/favourite.reducer';
-import { UserReducer } from './store/reducers/user.reducer';
+import { reducers } from './store/reducers/app.reducers';
 
 import { AuthService } from './services/auth.service';
 import { ApiService } from './services/api.service';
 import { PlanetService } from './services/planet.service';
 import { ResidentService } from './services/resident.service';
 import { FavouriteService } from './services/favourite.service';
+
 import { AppComponent } from './components/app/app.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { PlanetDetailsComponent } from './components/planet-details/planet-details.component';
@@ -41,12 +39,7 @@ import { NotApplicablePipe } from './pipes/not-applicable.pipe';
     NotApplicablePipe
   ],
   imports: [
-    StoreModule.forRoot({
-      planets: PlanetReducer,
-      residents: ResidentReducer,
-      favourites: FavouriteReducer,
-      user: UserReducer
-    }),
+    StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument(),
     AppRoutingModule,
     ThemeModule,

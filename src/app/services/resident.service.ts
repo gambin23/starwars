@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AppState } from '../store/app.state';
+import { IAppState } from '../store/app.state';
 import { AddResident, ClearResidents } from '../store/actions/resident.actions';
 import { Resident } from '../models/resident.model';
 import { Observable } from 'rxjs';
@@ -11,7 +11,7 @@ import * as _ from 'lodash';
 })
 export class ResidentService {
 
-  constructor(private store: Store<AppState>) { }
+  constructor(private store: Store<IAppState>) { }
 
   public getAll(): Observable<Resident[]> {
     return this.store.select(s => _.sortBy<Resident>(s.residents, r => r.name));
