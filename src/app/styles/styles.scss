@@ -1,25 +1,4 @@
-@import '~@angular/material/theming';
-@import "~normalize.css/normalize.css";
-@font-face {
-    font-family: "STARWARS";
-    src: url("src/assets/fonts/STARWARS.eot?") format("eot"), url("src/assets/fonts/STARWARS.woff") format("woff"), url("src/assets/fonts/STARWARS.ttf") format("truetype"), url("src/assets/fonts/STARWARS.svg#STARWARS") format("svg");
-    font-weight: normal;
-    font-style: normal;
-}
-
-@include mat-core();
-$primary: mat-palette($mat-yellow,A200);
-$accent: mat-palette($mat-pink,A200,A100,A400);
-$warn: mat-palette($mat-red);
-$theme: mat-dark-theme($primary,$accent,$warn);
-@include angular-material-theme($theme);
-
-$font-primary: "STARWARS";
-
-$dark-gray: #212121;
-$light-gray: gray;
-$mid-gray: #424242;
-$white: #ffffff;
+@import '../styles//theme.scss';
 
 body, html {
   background-color: $mid-gray;
