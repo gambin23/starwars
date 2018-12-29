@@ -1,3 +1,4 @@
+import { environment } from '../environments/environment';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
@@ -40,7 +41,7 @@ import { NotApplicablePipe } from './pipes/not-applicable.pipe';
   ],
   imports: [
     StoreModule.forRoot(reducers),
-    StoreDevtoolsModule.instrument(),
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
     AppRoutingModule,
     ThemeModule,
     BrowserModule,
