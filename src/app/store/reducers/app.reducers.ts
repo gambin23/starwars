@@ -9,5 +9,5 @@ export const reducers: ActionReducerMap<IAppState> = {
   planets: PlanetReducer,
   residents: ResidentReducer,
   favourites: FavouriteReducer,
-  user: UserReducer
+  account: UserReducer
 };

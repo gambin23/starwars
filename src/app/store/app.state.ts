@@ -4,19 +4,32 @@ import { Planet } from '../models/planet.model';
 import { User } from '../models/user.model';
 
 export interface IAppState {
-  readonly planets: { currentList: PlanetList, planets: Planet[] };
-  readonly residents: Resident[];
-  readonly favourites: string[];
-  readonly user: User;
+  planets: {
+    currentList: PlanetList,
+    planets: Planet[],
+    loading: boolean,
+    error: string
+  };
+  residents: Resident[];
+  favourites: string[];
+  account: {
+    user: User,
+    authenticated: boolean
+  };
 }
 
 export const AppState: IAppState = {
   planets: {
-    currentList: null as PlanetList,
-    planets: [] as Planet[]
+    currentList: null,
+    planets: [],
+    loading: false,
+    error: null
   },
-  residents: [] as Resident[],
-  favourites: [] as string[],
-  user: null as User
+  residents: [],
+  favourites: [],
+  account: {
+    user: null,
+    authenticated: false
+  }
 };
 

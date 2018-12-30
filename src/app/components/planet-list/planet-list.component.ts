@@ -1,11 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Planet } from '../../models/planet.model';
+import { Store } from '@ngrx/store';
+import { IAppState } from '../../store/app.state';
 import { PlanetList } from '../../models/planet-list.model';
 import { PlanetService } from '../../services/planet.service';
+import { LoadPlanetList } from '../../store/actions/planet.actions';
 import { Observable, Subscription } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { debounceTime, startWith } from 'rxjs/operators';
-import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-planet-list',
@@ -14,22 +15,26 @@ import { ApiService } from '../../services/api.service';
 })
 export class PlanetListComponent implements OnInit, OnDestroy {
 
-  planetList$: Observable<PlanetList>;
-  valueChange: Subscription;
   search = new FormControl();
-  error: string;
-  loading = false;
+  valueChange: Subscription;
+  planetList$: Observable<PlanetList>;
+  error$: Observable<string>;
+  loading$: Observable<boolean>;
 
   constructor(
-    private planetService: PlanetService,
-    private api: ApiService,
+    private store: Store<IAppState>,
   ) { }
 
-
   ngOnInit() {
-    this.valueChange = this.search.valueChanges.pipe(debounceTime(1500), startWith(''))
-      .subscribe(value => {
-        this.loadPlanets(this.api.getPlanets(value));
+    this.valueChange = this.search.valueChanges.pipe(
+      debounceTime(1500),
+      startWith('')
+    )
+      .subscribe((value: string) => {
+        this.store.dispatch(new LoadPlanetList({ criteria: value, url: null }));
+        this.planetList$ = this.store.select(s => s.planets.currentList);
+        this.loading$ = this.store.select(s => s.planets.loading);
+        this.error$ = this.store.select(s => s.planets.error);
       });
   }
 
@@ -38,32 +43,10 @@ export class PlanetListComponent implements OnInit, OnDestroy {
   }
 
   onNextPage() {
-    this.planetList$.subscribe(p => {
-      this.loadPlanets(this.api.getPlanetsNext(p.next));
-    }).unsubscribe();
-
+    this.planetList$.subscribe(p => this.store.dispatch(new LoadPlanetList({ criteria: null, url: p.next }))).unsubscribe();
   }
 
   onPreviousPage() {
-    this.planetList$.subscribe(p => {
-      this.loadPlanets(this.api.getPlanetsPrevious(p.previous));
-    }).unsubscribe();
-
-  }
-
-  loadPlanets(planets: Observable<PlanetList>) {
-    this.loading = true;
-    this.error = null;
-    planets.subscribe(
-      planetList => {
-        this.loading = false;
-        this.planetService.addList(planetList);
-        planetList.results.map(planet => this.planetService.add(planet));
-        this.planetList$ = this.planetService.getCurrentList();
-      },
-      error => {
-        this.loading = false;
-        this.error = 'Failed to obtain planets';
-      });
+    this.planetList$.subscribe(p => this.store.dispatch(new LoadPlanetList({ criteria: null, url: p.previous }))).unsubscribe();
   }
 }

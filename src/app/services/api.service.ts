@@ -14,15 +14,12 @@ export class ApiService {
   constructor(private client: HttpClient) {
   }
 
-  public getPlanets(criteria: string) {
-    return this.client.get<PlanetList>(`${baseUrl}planets/?search=${criteria}`);
-  }
-
-  public getPlanetsNext(url: string) {
-    return this.client.get<PlanetList>(url);
-  }
-  public getPlanetsPrevious(url: string) {
-    return this.client.get<PlanetList>(url);
+  public getPlanets(criteria: string, url: string = null) {
+    if (url == null) {
+      return this.client.get<PlanetList>(`${baseUrl}planets/?search=${criteria}`);
+    } else {
+      return this.client.get<PlanetList>(url);
+    }
   }
 
   public getResident(url: string) {

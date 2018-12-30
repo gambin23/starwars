@@ -7,23 +7,32 @@ import * as _ from 'lodash';
 export function PlanetReducer(state = AppState.planets, action: PlanetActions.Actions) {
 
   switch (action.type) {
-    case PlanetActions.ADD_PLANETLIST:
-      state.currentList = action.payload;
+    case PlanetActions.LOAD_PLANETLIST:
+      state.loading = true;
       return state;
-    case PlanetActions.ADD_PLANET:
-      const index = state.planets.findIndex(p => p.name.toLowerCase() === action.payload.name.toLowerCase());
-      if (index === -1) {
-        state.planets = [...state.planets, action.payload];
-      } else {
-        state.planets.splice(index, 1, action.payload);
-      }
+    case PlanetActions.ADD_PLANETLIST:
+      state.error = null;
+      state.loading = false;
+      state.currentList = action.payload;
+      state.planets = addPlanets(state.planets, action.payload.results);
+      return state;
+    case PlanetActions.ERROR_PLANETLIST:
+      state.error = action.payload;
+      state.loading = false;
       return state;
     default:
       return state;
   }
 }
 
-class PlanetState {
-  currentList: PlanetList;
-  planets: Planet[];
+function addPlanets(state: Planet[], planets: Planet[]): Planet[] {
+  planets.map(p => {
+    const index = state.findIndex(sp => sp.name.toLowerCase() === p.name.toLowerCase());
+    if (index === -1) {
+      state = [...state, p];
+    } else {
+      state.splice(index, 1, p);
+    }
+  });
+  return state;
 }

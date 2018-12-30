@@ -7,8 +7,8 @@
   <button mat-button [disabled]="(planetList$ | async)?.previous == null" (click)="onPreviousPage()" class="button-nav">Previous</button>
   <button mat-button [disabled]="(planetList$ | async)?.next == null" (click)="onNextPage()" class="button-nav">Next</button>
 </div>
-<mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
-<div *ngIf="error != null" class="error">{{error}}</div>
+<mat-progress-bar *ngIf="loading$ | async" mode="indeterminate"></mat-progress-bar>
+<div *ngIf="(error$ | async) != null" class="error">{{error$ | async}}</div>
 <mat-nav-list>
   <div *ngFor="let planet of (planetList$ | async)?.results">
     <mat-list-item [routerLink]="[planet.name]" routerLinkActive="active" class="planet-link">

@@ -9,8 +9,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ThemeModule } from './theme.module';
 
 import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducers } from './store/reducers/app.reducers';
+import { PlanetEffects } from './store/effects/planet.effects';
 
 import { AuthService } from './services/auth.service';
 import { ApiService } from './services/api.service';
@@ -41,6 +43,7 @@ import { NotApplicablePipe } from './pipes/not-applicable.pipe';
   ],
   imports: [
     StoreModule.forRoot(reducers),
+    EffectsModule.forRoot([PlanetEffects]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     AppRoutingModule,
     ThemeModule,

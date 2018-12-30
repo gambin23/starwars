@@ -1,21 +1,21 @@
 import { Action } from '@ngrx/store';
 import { User } from '../../models/user.model';
 
-export const ADD_USER = 'USER_ADD';
-export const DELETE_USER = 'USER_DELETE';
+export const USER_LOGIN = 'USER_LOGIN';
+export const USER_LOGOUT = 'USER_LOGOUT';
 
-export class AddUser implements Action {
-  readonly type = ADD_USER;
+export class Login implements Action {
+  readonly type = USER_LOGIN;
 
   constructor(public payload: User) {
   }
 }
 
-export class DeleteUser implements Action {
-  readonly type = DELETE_USER;
+export class Logout implements Action {
+  readonly type = USER_LOGOUT;
 
   constructor() {
   }
 }
 
-export type Actions = AddUser | DeleteUser;
+export type Actions = Login | Logout;

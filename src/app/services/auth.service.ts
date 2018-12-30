@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { User } from '../models/user.model';
-import { AddUser, DeleteUser } from '../store/actions/user.actions';
+import { Login, Logout } from '../store/actions/user.actions';
 import { Store } from '@ngrx/store';
 import { IAppState } from '../store/app.state';
 import { Observable, Observer } from 'rxjs';
@@ -23,7 +23,7 @@ export class AuthService {
       setTimeout(() => {
         if (foundUser != null) {
           if (foundUser.password === user.password) {
-            this.store.dispatch(new AddUser(user));
+            this.store.dispatch(new Login(user));
             observer.next(foundUser);
           } else {
             observer.error('Invalid password.');
@@ -36,10 +36,13 @@ export class AuthService {
   }
 
   public logout() {
-    this.store.dispatch(new DeleteUser());
+    this.store.dispatch(new Logout());
   }
 
   public getUser(): Observable<User> {
-    return this.store.select(s => s.user);
+    return this.store.select(s => s.account.user);
+  }
+  public isAuthenticated(): Observable<boolean> {
+    return this.store.select(s => s.account.authenticated);
   }
 }
