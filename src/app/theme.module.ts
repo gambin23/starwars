@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
+import { FlexLayoutModule } from '@angular/flex-layout';
 import {
   MatToolbarModule,
   MatButtonModule,
@@ -20,6 +19,7 @@ import {
   imports: [],
   providers: [],
   exports: [
+    FlexLayoutModule,
     MatToolbarModule,
     MatButtonModule,
     MatExpansionModule,

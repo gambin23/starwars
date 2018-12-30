@@ -1,5 +1,5 @@
 <div *ngIf="(planet$ | async) != null" id="planet-details-header">
-  {{(planet$ | async).name | uppercase}} - {{(planet$ | async).residents.length}} residents
+  {{(planet$ | async).name | uppercase}}<span fxHide.xs> - {{(planet$ | async).residents.length}} residents</span>
   <app-add-favourite [planet]="planet$ | async"></app-add-favourite>
 </div>
 <mat-progress-bar *ngIf="loading$ | async" mode="indeterminate"></mat-progress-bar>
