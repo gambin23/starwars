@@ -1,8 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { IAppState } from 'src/app/store/app.state';
 import { Planet } from '../../models/planet.model';
-import { FavouriteService } from '../../services/favourite.service';
 import { Observable } from 'rxjs';
-import * as _ from 'lodash';
+import { AddFavourite, RemoveFavourite } from 'src/app/store/actions/favourite.actions';
 
 @Component({
   selector: 'app-add-favourite',
@@ -14,21 +15,20 @@ export class AddFavouriteComponent implements OnInit {
 
   @Input() planet: Planet;
 
-  constructor(private favouriteService: FavouriteService) {
-  }
+  constructor(private store: Store<IAppState>) { }
 
   ngOnInit() {
   }
 
   onAddFavourite() {
-    this.favouriteService.add(this.planet);
+    this.store.dispatch(new AddFavourite(this.planet.name));
   }
 
   onRemoveFavourite() {
-    this.favouriteService.delete(this.planet);
+    this.store.dispatch(new RemoveFavourite(this.planet.name));
   }
 
   isFavourite(): Observable<Planet> {
-    return this.favouriteService.getById(this.planet.name);
+    return this.store.select(s => s.planets.planets.find(p => s.favourites.includes(this.planet.name)));
   }
 }

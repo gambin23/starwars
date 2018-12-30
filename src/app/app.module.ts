@@ -19,7 +19,6 @@ import { AuthService } from './services/auth.service';
 import { ApiService } from './services/api.service';
 import { PlanetService } from './services/planet.service';
 import { ResidentService } from './services/resident.service';
-import { FavouriteService } from './services/favourite.service';
 
 import { AppComponent } from './components/app/app.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
@@ -60,7 +59,6 @@ import { NotApplicablePipe } from './pipes/not-applicable.pipe';
     ApiService,
     PlanetService,
     ResidentService,
-    FavouriteService,
   ],
   bootstrap: [AppComponent]
 })

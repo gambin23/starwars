@@ -7,7 +7,7 @@ export function FavouriteReducer(state = AppState.favourites, action: FavouriteA
   switch (action.type) {
     case FavouriteActions.ADD_FAVOURITE:
       return [...state, action.payload];
-    case FavouriteActions.DELETE_FAVOURITE:
+    case FavouriteActions.REMOVE_FAVOURITE:
       const index = state.indexOf(action.payload);
       return [...state.slice(0, index), ...state.slice(index + 1)];
     default:
