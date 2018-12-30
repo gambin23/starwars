@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { IAppState } from 'src/app/store/app.state';
+import { LogoutTry } from 'src/app/store/actions/account.actions';
 
 @Component({
   selector: 'app-navigation',
@@ -10,14 +11,9 @@ import { Router } from '@angular/router';
 
 export class NavigationComponent {
 
-  constructor(
-    private authService: AuthService,
-    private router: Router,
-  ) {
-  }
+  constructor(private store: Store<IAppState>) { }
 
   logout() {
-    this.authService.logout();
-    this.router.navigate(['/login']);
+    this.store.dispatch(new LogoutTry());
   }
 }

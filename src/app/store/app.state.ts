@@ -14,7 +14,9 @@ export interface IAppState {
   favourites: string[];
   account: {
     user: User,
-    authenticated: boolean
+    authenticated: boolean,
+    loading: boolean,
+    error: string
   };
 }
 
@@ -29,7 +31,9 @@ export const AppState: IAppState = {
   favourites: [],
   account: {
     user: null,
-    authenticated: false
+    authenticated: false,
+    loading: false,
+    error: null
   }
 };
 

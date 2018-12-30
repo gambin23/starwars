@@ -1,8 +1,8 @@
 <div class="background">
-  <div *ngIf="!loading" class="form-margin">
+  <div *ngIf="!(loading$ | async)" class="form-margin">
     <form (ngSubmit)="onLogin()" [formGroup]="form" class="form">
       <mat-toolbar color="primary" id="header">STARWARS</mat-toolbar>
-      <div id="error">{{error}}</div>
+      <div *ngIf="(error$ | async) != null" id="error">{{error$ | async}}</div>
       <mat-form-field class="input">
         <input matInput [formControl]="username" placeholder="USERNAME">
       </mat-form-field>
@@ -14,7 +14,7 @@
       </div>
     </form>
   </div>
-  <div *ngIf="loading" id="loader">
+  <div *ngIf="loading$ | async" id="loader">
     <mat-icon svgIcon="r2d2" style="height: 100px; width: 100px;"></mat-icon>
   </div>
 </div>

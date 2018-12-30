@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { IAppState } from '../../store/app.state';
+import { LoginTry } from 'src/app/store/actions/account.actions';
 import { User } from '../../models/user.model';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from 'src/app/services/auth.service';
-import {Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -12,9 +13,8 @@ import {Subscription } from 'rxjs';
 })
 export class LoginComponent implements OnInit, OnDestroy {
 
-  loading = false;
-  error = '';
-  authenticateSubscription: Subscription;
+  loading$: Observable<boolean>;
+  error$: Observable<string>;
 
   username = new FormControl('', [Validators.required]);
   password = new FormControl('', [Validators.required]);
@@ -24,8 +24,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   });
 
   constructor(
-    private authService: AuthService,
-    private router: Router,
+    private store: Store<IAppState>,
   ) {
   }
 
@@ -34,22 +33,12 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   onLogin() {
     const user = this.form.value as User;
-    this.loading = true;
-    this.authenticate(user);
-  }
-
-  authenticate(user: User) {
-    this.authenticateSubscription = this.authService.login(user).subscribe(
-      foundUser => { this.router.navigate(['planets']); },
-      error => {
-        this.error = error;
-        this.loading = false;
-      }
-    );
+    this.store.dispatch(new LoginTry(user));
+    this.loading$ = this.store.select(s => s.account.loading);
+    this.error$ = this.store.select(s => s.account.error);
   }
 
   ngOnDestroy() {
-    this.authenticateSubscription.unsubscribe();
   }
 
 }
