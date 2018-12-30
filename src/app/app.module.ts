@@ -14,11 +14,10 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducers } from './store/reducers/app.reducers';
 import { PlanetEffects } from './store/effects/planet.effects';
 import { AccountEffects } from './store/effects/account.effects';
+import { ResidentEffects } from './store/effects/resident.effects';
 
 import { AuthService } from './services/auth.service';
 import { ApiService } from './services/api.service';
-import { PlanetService } from './services/planet.service';
-import { ResidentService } from './services/resident.service';
 
 import { AppComponent } from './components/app/app.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
@@ -43,7 +42,7 @@ import { NotApplicablePipe } from './pipes/not-applicable.pipe';
   ],
   imports: [
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([PlanetEffects, AccountEffects]),
+    EffectsModule.forRoot([PlanetEffects, AccountEffects, ResidentEffects]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     AppRoutingModule,
     ThemeModule,
@@ -57,8 +56,6 @@ import { NotApplicablePipe } from './pipes/not-applicable.pipe';
   providers: [
     AuthService,
     ApiService,
-    PlanetService,
-    ResidentService,
   ],
   bootstrap: [AppComponent]
 })

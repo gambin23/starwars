@@ -11,20 +11,17 @@ export const LOGOUT_FAIL = 'LOGOUT_FAIL';
 
 export class LoginTry implements Action {
   readonly type = LOGIN_TRY;
-  constructor(public payload: User) {
-  }
+  constructor(public payload: User) { }
 }
 
 export class LoginSuccess implements Action {
   readonly type = LOGIN_SUCCESS;
-  constructor(public payload: User) {
-  }
+  constructor(public payload: User) { }
 }
 
 export class LoginFail implements Action {
   readonly type = LOGIN_FAIL;
-  constructor(public payload: string) {
-  }
+  constructor(public payload: string) { }
 }
 
 export class LogoutTry implements Action {

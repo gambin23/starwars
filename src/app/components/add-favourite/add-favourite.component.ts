@@ -28,7 +28,7 @@ export class AddFavouriteComponent implements OnInit {
     this.store.dispatch(new RemoveFavourite(this.planet.name));
   }
 
-  isFavourite(): Observable<Planet> {
-    return this.store.select(s => s.planets.planets.find(p => s.favourites.includes(this.planet.name)));
+  isFavourite(): Observable<boolean> {
+    return this.store.select(s => s.favourites.includes(this.planet.name));
   }
 }

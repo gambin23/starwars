@@ -1,8 +1,9 @@
 <div *ngIf="(planet$ | async) != null" id="planet-details-header">
-  <app-add-favourite [planet]="planet$ | async"></app-add-favourite>
   {{(planet$ | async).name | uppercase}} - {{(planet$ | async).residents.length}} residents
+  <app-add-favourite [planet]="planet$ | async"></app-add-favourite>
 </div>
-<mat-progress-bar *ngIf="(planet$ | async)?.residents.length > (residents$ | async)?.length" mode="indeterminate"></mat-progress-bar>
+<mat-progress-bar *ngIf="loading$ | async" mode="indeterminate"></mat-progress-bar>
+<div *ngIf="(error$ | async) != null" class="error">{{error$ | async}}</div>
 <div id="no-residents" *ngIf="(planet$ | async)?.residents.length == 0">There are no residents on this planet</div>
 <mat-table [dataSource]="(residents$ | async)" class="table">
   <ng-container matColumnDef="name">

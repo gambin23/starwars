@@ -10,7 +10,11 @@ export interface IAppState {
     loading: boolean,
     error: string
   };
-  residents: Resident[];
+  residents: {
+    residents: Resident[],
+    loading: boolean,
+    error: string
+  };
   favourites: string[];
   account: {
     user: User,
@@ -27,7 +31,11 @@ export const AppState: IAppState = {
     loading: false,
     error: null
   },
-  residents: [],
+  residents:  {
+    residents: [],
+    loading: false,
+    error: null
+  },
   favourites: [],
   account: {
     user: null,

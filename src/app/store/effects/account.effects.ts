@@ -11,12 +11,18 @@ import {
 import { Effect, Actions, ofType } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
-import { map, switchMap, mergeMap, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { map, switchMap, catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 @Injectable()
 export class AccountEffects {
+
+  constructor(
+    private actions$: Actions,
+    private authService: AuthService,
+    private router: Router) {
+  }
 
   @Effect()
   login = this.actions$.pipe(
@@ -41,9 +47,4 @@ export class AccountEffects {
   );
 
 
-  constructor(
-    private actions$: Actions,
-    private authService: AuthService,
-    private router: Router) {
-  }
 }

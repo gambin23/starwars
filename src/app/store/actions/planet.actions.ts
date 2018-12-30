@@ -9,33 +9,22 @@ export const ERROR_PLANETLIST = 'PLANETLIST_ERROR';
 export const ADD_PLANET = 'PLANETS_ADD';
 
 
-export class LoadPlanetList implements Action {
+export class PlanetListLoad implements Action {
   readonly type = LOAD_PLANETLIST;
-  constructor(public payload: { criteria: string, url: string }) {
-  }
+  constructor(public payload: { criteria: string, url: string }) { }
 }
 
-export class ErrorPlanetList implements Action {
-  readonly type = ERROR_PLANETLIST;
-  constructor(public payload: string) {
-  }
-}
-
-export class AddPlanetList implements Action {
+export class PlanetListSuccess implements Action {
   readonly type = ADD_PLANETLIST;
 
-  constructor(public payload: PlanetList) {
-  }
+  constructor(public payload: PlanetList) { }
 }
-
-export class AddPlanet implements Action {
-  readonly type = ADD_PLANET;
-  constructor(public payload: Planet) {
-  }
+export class PlanetListError implements Action {
+  readonly type = ERROR_PLANETLIST;
+  constructor(public payload: string) { }
 }
 
 export type Actions =
-  LoadPlanetList
-  | ErrorPlanetList
-  | AddPlanetList
-  | AddPlanet;
+  PlanetListLoad
+  | PlanetListError
+  | PlanetListSuccess;

@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { IAppState } from 'src/app/store/app.state';
+import { AddResidentsLoad, ClearResidents } from 'src/app/store/actions/resident.actions';
 import { Planet } from '../../models/planet.model';
 import { Resident } from '../../models/resident.model';
-import { PlanetService } from '../../services/planet.service';
-import { ResidentService } from '../../services/resident.service';
 import { ActivatedRoute } from '@angular/router';
-import * as _ from 'lodash';
 import { Observable, Subscription } from 'rxjs';
-import { ApiService } from '../../services/api.service';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-planet-details',
@@ -16,42 +16,40 @@ import { ApiService } from '../../services/api.service';
 
 export class PlanetDetailsComponent implements OnInit, OnDestroy {
   routeChange: Subscription;
-  planetChange: Subscription;
   planet$: Observable<Planet>;
   residents$: Observable<Resident[]>;
+  loading$: Observable<boolean>;
+  error$: Observable<string>;
   columns: string[] = ['name', 'gender', 'height', 'mass'];
 
   constructor(
-    private api: ApiService,
-    private planetService: PlanetService,
-    private residentService: ResidentService,
+    private store: Store<IAppState>,
     private route: ActivatedRoute,
   ) {
   }
 
   ngOnInit() {
     this.routeChange = this.route.params.subscribe(param => {
-      this.planet$ = this.planetService.getById(param.id);
 
-      this.planetChange = this.planet$.subscribe(planet => {
+      this.planet$ = this.store.select(s => s.planets.planets.find(p => p.name === param.id));
+
+      this.planet$.subscribe(planet => {
         if (planet != null) {
-          this.residentService.removeAll();
-          planet.residents.map(url => {
-            this.api.getResident(url).subscribe(r => {
-              r.planet = param.id;
-              this.residentService.add(r);
-            });
-          });
+          this.store.dispatch(new ClearResidents());
+          if (planet.residents.length > 0) {
+            this.store.dispatch(new AddResidentsLoad(planet));
+          }
         }
-      });
+      }).unsubscribe();
 
-      this.residents$ = this.residentService.filterByPlanet(param.id);
+      this.residents$ = this.store.select(s => _.sortBy(s.residents.residents, r => r.name, ['asc']));
+      this.loading$ = this.store.select(s => s.residents.loading);
+      this.error$ = this.store.select(s => s.residents.error);
     });
   }
 
   ngOnDestroy() {
     this.routeChange.unsubscribe();
-    this.planetChange.unsubscribe();
   }
 
 }

@@ -2,8 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { IAppState } from '../../store/app.state';
 import { PlanetList } from '../../models/planet-list.model';
-import { PlanetService } from '../../services/planet.service';
-import { LoadPlanetList } from '../../store/actions/planet.actions';
+import { PlanetListLoad } from '../../store/actions/planet.actions';
 import { Observable, Subscription } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { debounceTime, startWith } from 'rxjs/operators';
@@ -31,7 +30,7 @@ export class PlanetListComponent implements OnInit, OnDestroy {
       startWith('')
     )
       .subscribe((value: string) => {
-        this.store.dispatch(new LoadPlanetList({ criteria: value, url: null }));
+        this.store.dispatch(new PlanetListLoad({ criteria: value, url: null }));
         this.planetList$ = this.store.select(s => s.planets.currentList);
         this.loading$ = this.store.select(s => s.planets.loading);
         this.error$ = this.store.select(s => s.planets.error);
@@ -43,10 +42,10 @@ export class PlanetListComponent implements OnInit, OnDestroy {
   }
 
   onNextPage() {
-    this.planetList$.subscribe(p => this.store.dispatch(new LoadPlanetList({ criteria: null, url: p.next }))).unsubscribe();
+    this.planetList$.subscribe(p => this.store.dispatch(new PlanetListLoad({ criteria: null, url: p.next }))).unsubscribe();
   }
 
   onPreviousPage() {
-    this.planetList$.subscribe(p => this.store.dispatch(new LoadPlanetList({ criteria: null, url: p.previous }))).unsubscribe();
+    this.planetList$.subscribe(p => this.store.dispatch(new PlanetListLoad({ criteria: null, url: p.previous }))).unsubscribe();
   }
 }
