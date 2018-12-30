@@ -1,7 +1,7 @@
 import { Action } from '@ngrx/store';
 
-export const ADD_FAVOURITE = '[FAVOURITE] ADD';
-export const DELETE_FAVOURITE = '[FAVOURITE] DELETE';
+export const ADD_FAVOURITE = 'FAVOURITE_ADD';
+export const DELETE_FAVOURITE = 'FAVOURITE_DELETE';
 
 export class AddFavourite implements Action {
   readonly type = ADD_FAVOURITE;

@@ -2,8 +2,8 @@ import { Action } from '@ngrx/store';
 import { PlanetList } from '../../models/planet-list.model';
 import { Planet } from '../../models/planet.model';
 
-export const ADD_PLANETLIST = '[PLANETLIST] ADD';
-export const ADD_PLANET = '[PLANETS] ADD';
+export const ADD_PLANETLIST = 'PLANETLIST_ADD';
+export const ADD_PLANET = 'PLANETS_ADD';
 
 export class AddPlanetList implements Action {
   readonly type = ADD_PLANETLIST;

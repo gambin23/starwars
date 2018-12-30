@@ -1,8 +1,8 @@
 import { Action } from '@ngrx/store';
 import { Resident } from '../../models/resident.model';
 
-export const ADD_RESIDENT = '[RESIDENTS] ADD';
-export const CLEAR_RESIDENTS = '[RESIDENTS] CLEAR';
+export const ADD_RESIDENT = 'RESIDENTS_ADD';
+export const CLEAR_RESIDENTS = 'RESIDENTS_CLEAR';
 
 export class AddResident implements Action {
   readonly type = ADD_RESIDENT;

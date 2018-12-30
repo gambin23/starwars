@@ -1,8 +1,8 @@
 import { Action } from '@ngrx/store';
 import { User } from '../../models/user.model';
 
-export const ADD_USER = '[USER] ADD';
-export const DELETE_USER = '[USER] DELETE';
+export const ADD_USER = 'USER_ADD';
+export const DELETE_USER = 'USER_DELETE';
 
 export class AddUser implements Action {
   readonly type = ADD_USER;
