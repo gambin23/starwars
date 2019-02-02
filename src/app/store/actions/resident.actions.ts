@@ -7,6 +7,7 @@ export const ADD_RESIDENTS_LOAD = 'ADD_RESIDENTS_LOAD';
 export const ADD_RESIDENTS_SUCCESS = 'ADD_RESIDENTS_SUCCESS';
 export const ADD_RESIDENTS_ERROR = 'ADD_RESIDENTS_ERROR';
 export const CLEAR_RESIDENTS = 'CLEAR_RESIDENTS';
+export const VIEW_RESIDENTS = 'VIEW_RESIDENTS';
 
 export class AddResident implements Action {
   readonly type = ADD_RESIDENT;
@@ -32,9 +33,15 @@ export class ClearResidents implements Action {
   readonly type = CLEAR_RESIDENTS;
 }
 
+export class ViewResidents implements Action {
+  readonly type = VIEW_RESIDENTS;
+  constructor(public payload: string) { }
+}
+
 export type Actions =
   AddResident
   | AddResidentsLoad
   | AddResidentsSuccess
   | AddResidentsError
-  | ClearResidents;
+  | ClearResidents
+  | ViewResidents;

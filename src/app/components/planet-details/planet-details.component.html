@@ -1,31 +1,14 @@
-<div *ngIf="(planet$ | async) != null" id="planet-details-header">
+<div *ngIf="(planet$ | async) != null" id="planet-details-header" style="padding-left: 25px; padding-right: 25px;">
   {{(planet$ | async).name | uppercase}}<span fxHide.xs> - {{(planet$ | async).residents.length}} residents</span>
   <app-add-favourite [planet]="planet$ | async"></app-add-favourite>
+  <mat-icon *ngIf="(view$ | async) == 'table'" (click)="onChangeView('cards')" style="float: right; cursor: pointer;">view_comfy</mat-icon>
+  <mat-icon *ngIf="(view$ | async) == 'cards'" (click)="onChangeView('table')" style="float: right; cursor: pointer;">view_list</mat-icon>
 </div>
+
 <mat-progress-bar *ngIf="loading$ | async" mode="indeterminate"></mat-progress-bar>
+
 <div *ngIf="(error$ | async) != null" class="error">{{error$ | async}}</div>
 <div id="no-residents" *ngIf="(planet$ | async)?.residents.length == 0">There are no residents on this planet</div>
-<mat-table [dataSource]="(residents$ | async)" class="table">
-  <ng-container matColumnDef="name">
-    <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
-    <mat-cell *matCellDef="let resident" class="row-head">{{resident.name}}</mat-cell>
-  </ng-container>
-  <ng-container matColumnDef="gender">
-    <mat-header-cell *matHeaderCellDef></mat-header-cell>
-    <mat-cell *matCellDef="let resident" class="row-minor">
-      <mat-icon *ngIf="resident.gender == 'male'" svgIcon="male"></mat-icon>
-      <mat-icon *ngIf="resident.gender == 'female'" svgIcon="female"></mat-icon>
-    </mat-cell>
-  </ng-container>
-  <ng-container matColumnDef="height">
-    <mat-header-cell *matHeaderCellDef>Height</mat-header-cell>
-    <mat-cell *matCellDef="let resident" class="row-minor">{{resident.height | na}} cm</mat-cell>
-  </ng-container>
-  <ng-container matColumnDef="mass">
-    <mat-header-cell *matHeaderCellDef>Weight</mat-header-cell>
-    <mat-cell *matCellDef="let resident" class="row-minor">{{resident.mass | na}} kg</mat-cell>
-  </ng-container>
 
-  <mat-row *matRowDef="let row; columns: columns;"></mat-row>
-
-</mat-table>
+<app-residents-cards *ngIf="(view$ | async) == 'cards'" [residents]="residents$ | async" [images]="images$ | async"></app-residents-cards>
+<app-residents-table *ngIf="(view$ | async) == 'table'" [residents]="residents$ | async"></app-residents-table>

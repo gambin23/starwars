@@ -1,0 +1,27 @@
+.card {
+  border-radius: 0;
+  font-family: 'STARWARS';
+  color: darkgray;
+  background-color: #0f0f0f;
+  cursor: pointer;
+}
+
+.card-title {
+  width: 80%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: block;
+  overflow: hidden;
+  text-align: left;
+  padding-bottom: 20px;
+  color: yellow;
+}
+
+.card-avatar {
+  width: 20%;
+  text-align: right;
+}
+
+::ng-deep .mat-card-header-text {
+  margin: 0!important;
+}

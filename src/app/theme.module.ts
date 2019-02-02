@@ -10,7 +10,8 @@ import {
   MatFormFieldModule,
   MatInputModule,
   MatTableModule,
-  MatProgressBarModule
+  MatProgressBarModule,
+  MatCardModule
 } from '@angular/material';
 
 
@@ -29,7 +30,8 @@ import {
     MatFormFieldModule,
     MatInputModule,
     MatProgressBarModule,
-    MatTableModule
+    MatTableModule,
+    MatCardModule
   ]
 })
 export class ThemeModule { }

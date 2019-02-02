@@ -22,6 +22,9 @@ export function ResidentReducer(state = AppState.residents, action: ResidentActi
     case ResidentActions.CLEAR_RESIDENTS:
       state.residents = [];
       return state;
+    case ResidentActions.VIEW_RESIDENTS:
+      state.view = action.payload;
+      return state;
     default:
       return state;
   }

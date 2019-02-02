@@ -26,6 +26,8 @@ import { LoginComponent } from './components/login/login.component';
 import { AddFavouriteComponent } from './components/add-favourite/add-favourite.component';
 import { FavouritesComponent } from './components/favourites/favourites.component';
 import { PlanetListComponent } from './components/planet-list/planet-list.component';
+import { ResidentsCardsComponent } from './components/planet-details/residents-cards/residents-cards.component';
+import { ResidentsTableComponent } from './components/planet-details/residents-table/residents-table.component';
 
 import { NotApplicablePipe } from './pipes/not-applicable.pipe';
 
@@ -35,6 +37,8 @@ import { NotApplicablePipe } from './pipes/not-applicable.pipe';
     LoginComponent,
     NavigationComponent,
     PlanetDetailsComponent,
+    ResidentsTableComponent,
+    ResidentsCardsComponent,
     AddFavouriteComponent,
     FavouritesComponent,
     PlanetListComponent,

@@ -1,0 +1,19 @@
+<div fxLayout.xs="column" fxLayout="row wrap" [@fadeAnimation]="'in'">
+  <div fxFlex.gt-md="25%" fxFlex.gt-xs="50%" *ngFor="let resident of residents" style="padding: 10px">
+    <mat-card class="card">
+      <mat-card-header class="card-header">
+        <div class="card-title">{{resident.name}}</div>
+        <div class="card-avatar">
+          <mat-icon *ngIf="resident.gender == 'male'" svgIcon="male"></mat-icon>
+          <mat-icon *ngIf="resident.gender == 'female'" svgIcon="female"></mat-icon>
+        </div>
+      </mat-card-header>
+      <img mat-card-image height="350px" [alt]="'Photo of' + resident.name" [src]="images[resident.name] != null ? images[resident.name]: '../../../../assets/images/no-image.jpg'">
+      <mat-card-content class="card-content">
+        <span>{{resident.height | na}} cm</span>
+        <span style="float: right">{{resident.mass | na}} kg</span>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+</div>
