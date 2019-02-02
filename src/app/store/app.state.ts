@@ -2,7 +2,6 @@ import { Resident } from '../models/resident.model';
 import { PlanetList } from '../models/planet-list.model';
 import { Planet } from '../models/planet.model';
 import { User } from '../models/user.model';
-import { Image } from '../models/image.model';
 import { IDictionary } from '../models/dictionary.interface';
 
 export interface IAppState {
@@ -61,8 +60,10 @@ export const AppState: IAppState = {
       'Luke Skywalker': 'https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg/revision/latest?cb=20170927034529',
       'Owen Lars': 'https://vignette.wikia.nocookie.net/starwars/images/e/eb/OwenCardTrader.png/revision/latest?cb=20171108050140',
       'R5-D4': 'https://vignette.wikia.nocookie.net/starwars/images/c/cb/R5-D4_Sideshow.png/revision/latest?cb=20160809033145',
-      'Shmi Skywalker': 'https://vignette.wikia.nocookie.net/starwars/images/a/ad/ShmiSkywalkerDatabank_%28Repurposed%29.jpeg/revision/latest?cb=20171114023541'
-
+      'Shmi Skywalker': 'https://vignette.wikia.nocookie.net/starwars/images/a/ad/ShmiSkywalkerDatabank_%28Repurposed%29.jpeg/revision/latest?cb=20171114023541',
+      'Bail Prestor Organa': 'https://vignette.wikia.nocookie.net/starwars/images/5/50/Bail_Organa_Mug.jpg/revision/latest?cb=20080823033853',
+      'Leia Organa': 'https://vignette.wikia.nocookie.net/starwars/images/f/fc/Leia_Organa_TLJ.png/revision/latest?cb=20171224004147',
+      'Raymus Antilles': 'https://vignette.wikia.nocookie.net/starwars/images/8/80/Raymus_card_trader.png/revision/latest?cb=20180922045037'
     }
   },
   favourites: [],

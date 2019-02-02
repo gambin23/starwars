@@ -8,7 +8,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import * as _ from 'lodash';
 import { IDictionary } from 'src/app/models/dictionary.interface';
-import { Image } from 'src/app/models/image.model';
 
 @Component({
   selector: 'app-planet-details',
@@ -20,7 +19,7 @@ export class PlanetDetailsComponent implements OnInit, OnDestroy {
   routeChange: Subscription;
   planet$: Observable<Planet>;
   residents$: Observable<Resident[]>;
-  images$: Observable<IDictionary<Image>>;
+  images$: Observable<IDictionary<string>>;
   loading$: Observable<boolean>;
   error$: Observable<string>;
   view$: Observable<string>;
