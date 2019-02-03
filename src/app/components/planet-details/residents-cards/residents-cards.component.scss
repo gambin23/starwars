@@ -22,6 +22,12 @@
   text-align: right;
 }
 
+.image {
+  background-image: url(../../../../assets/images/loader2.gif);
+  background-size: cover;
+  min-height: 350px;
+}
+
 ::ng-deep .mat-card-header-text {
   margin: 0!important;
 }

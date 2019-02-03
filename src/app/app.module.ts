@@ -30,6 +30,7 @@ import { ResidentsCardsComponent } from './components/planet-details/residents-c
 import { ResidentsTableComponent } from './components/planet-details/residents-table/residents-table.component';
 
 import { NotApplicablePipe } from './pipes/not-applicable.pipe';
+import { ResidentComponent } from './components/planet-details/resident/resident.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { NotApplicablePipe } from './pipes/not-applicable.pipe';
     PlanetDetailsComponent,
     ResidentsTableComponent,
     ResidentsCardsComponent,
+    ResidentComponent,
     AddFavouriteComponent,
     FavouritesComponent,
     PlanetListComponent,

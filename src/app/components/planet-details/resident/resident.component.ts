@@ -4,9 +4,9 @@ import { trigger, state, transition, animate, style } from '@angular/animations'
 import { IDictionary } from 'src/app/models/dictionary.interface';
 
 @Component({
-  selector: 'app-residents-cards',
-  templateUrl: './residents-cards.component.html',
-  styleUrls: ['./residents-cards.component.scss'],
+  selector: 'app-resident',
+  templateUrl: './resident.component.html',
+  styleUrls: ['./resident.component.scss'],
   animations: [
     trigger('fadeAnimation', [
       state('in', style({ opacity: 1 })),
@@ -16,9 +16,10 @@ import { IDictionary } from 'src/app/models/dictionary.interface';
   ]
 })
 
-export class ResidentsCardsComponent implements OnInit {
-  @Input() residents: Resident[];
-  @Input() images: IDictionary<string>;
+export class ResidentComponent implements OnInit {
+  @Input() resident: Resident;
+  @Input() image: string;
+
 
   constructor() { }
 
