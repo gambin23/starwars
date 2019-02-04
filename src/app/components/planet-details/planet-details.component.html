@@ -3,9 +3,18 @@
   <app-add-favourite [planet]="planet$ | async"></app-add-favourite>
   <mat-icon *ngIf="(view$ | async) == 'table'" (click)="onChangeView('cards')" style="float: right; cursor: pointer;">view_comfy</mat-icon>
   <mat-icon *ngIf="(view$ | async) == 'cards'" (click)="onChangeView('table')" style="float: right; cursor: pointer;">view_list</mat-icon>
+  <mat-icon *ngIf="sort === 'asc'" (click)="onSort()" style="float: right; cursor: pointer;">arrow_upward</mat-icon>
+  <mat-icon *ngIf="sort === 'desc'" (click)="onSort()" style="float: right; cursor: pointer;">arrow_downward</mat-icon>
+  <mat-icon (click)="onShowSearch()" style="float: right; cursor: pointer;">search</mat-icon>
 </div>
-
 <mat-progress-bar *ngIf="loading$ | async" mode="indeterminate"></mat-progress-bar>
+
+<div *ngIf="showSearch" id="search">
+  <mat-form-field [floatLabel]="'never'" id="search-input">
+    <input [formControl]="search" (input)="onSearch()" matInput placeholder="Search..." autocomplete="off"/>
+    <mat-icon (click)="onHideSearch()" matSuffix style="cursor: pointer;">close</mat-icon>
+  </mat-form-field>
+</div>
 
 <div *ngIf="(error$ | async) != null" class="error">{{error$ | async}}</div>
 <div id="no-residents" *ngIf="(planet$ | async)?.residents.length == 0">There are no residents on this planet</div>

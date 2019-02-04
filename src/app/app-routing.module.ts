@@ -6,13 +6,18 @@ import { PlanetDetailsComponent } from './components/planet-details/planet-detai
 import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
+  // { path: 'login', component: LoginComponent },
+  // {
+  //   path: 'planets', canActivate: [AuthGuard], component: NavigationComponent, children: [
+  //     { path: ':id', component: PlanetDetailsComponent }
+  //   ]
+  // },
+  // { path: '**', redirectTo: '/login' }
   {
-    path: 'planets', canActivate: [AuthGuard], component: NavigationComponent, children: [
+    path: 'planets', component: NavigationComponent, children: [
       { path: ':id', component: PlanetDetailsComponent }
     ]
-  },
-  { path: '**', redirectTo: '/login' }
+  }
 ];
 
 @NgModule({

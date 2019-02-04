@@ -1,0 +1,17 @@
+#search {
+  color: black;
+  color: yellow;
+  background-color: #424242;
+  padding: 0 25px;
+}
+
+
+#search-input {
+  font-family: 'STARWARS';
+  color: yellow!important;
+  width: 100%;
+}
+
+::ng-deep .mat-form-field{
+  color: yellow!important;
+}

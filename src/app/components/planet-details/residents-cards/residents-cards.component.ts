@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Resident } from '../../../models/resident.model';
 import { trigger, state, transition, animate, style } from '@angular/animations';
-import { IDictionary } from 'src/app/models/dictionary.interface';
+import { IDictionary } from '../../../models/dictionary.interface';
 
 @Component({
   selector: 'app-residents-cards',
