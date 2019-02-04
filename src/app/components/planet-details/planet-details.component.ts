@@ -94,7 +94,7 @@ export class PlanetDetailsComponent implements OnInit, OnDestroy {
   }
 
   onSearch() {
-    this.residents$ = this.residents$.pipe(map(residents => residents.filter(r => r.name.toLowerCase().includes(this.search.value))));
+    this.residents$ = this.residents$.pipe(map(residents => residents.filter(r => r.name.toLowerCase().includes(this.search.value.toLowerCase()))));
   }
 }
 
