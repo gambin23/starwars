@@ -1,4 +1,4 @@
-<mat-nav-list style="margin-top: -5px;">
+<mat-nav-list>
   <div (click)="toggle()"class="favourites-header">
     <span *ngIf="(favourites$ | async).length > 0">{{(favourites$ | async).length}}</span>
     FAVOURITES

@@ -1,6 +1,6 @@
 <div fxLayout.xs="column" fxLayout="row wrap" fxLayoutAlign="center" [@fadeAnimation]="'in'">
   <div fxFlex.gt-md="300px" fxFlex.gt-xs="350px" *ngFor="let resident of residents" style="padding: 10px">
-    <mat-card class="card">
+    <mat-card class="card" (click)="onSelectResident(resident, images[resident.name])">
       <mat-card-header class="card-header">
         <div class="card-title">{{resident.name}}</div>
         <div class="card-avatar">

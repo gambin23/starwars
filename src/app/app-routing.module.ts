@@ -12,7 +12,12 @@ const routes: Routes = [
       { path: ':id', component: PlanetDetailsComponent }
     ]
   },
-  { path: '**', redirectTo: '/login' }
+  { path: '**', redirectTo: '/login' },
+  {
+    path: 'planets', component: NavigationComponent, children: [
+      { path: ':id', component: PlanetDetailsComponent }
+    ]
+  }
 ];
 
 @NgModule({

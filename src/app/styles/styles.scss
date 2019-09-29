@@ -22,14 +22,6 @@ input:-webkit-autofill {
     width: 100%;
 }
 
-#planet-details-header {
-    padding: 15px;
-    text-align: center;
-    font-family: $font-primary;
-    font-size: 18px;
-    background-color: $dark-gray;
-    color: mat-color($primary);
-}
 #no-residents {
   padding: 15px;
   text-align: center;
@@ -74,11 +66,4 @@ input:-webkit-autofill {
   font-family: $font-primary;
 }
 
-.favourites-header {
-  color:$dark-gray;
-  background-color: mat-color($primary);
-  font-family: $font-primary;
-  padding: 15px;
-  font-size: 18px;
-  cursor: pointer;
-}
+
