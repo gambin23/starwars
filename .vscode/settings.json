@@ -1,4 +1,8 @@
 {
     "appService.defaultWebAppToDeploy": "/subscriptions/d48757ea-07ff-4791-9468-b69ebd52449b/resourceGroups/gg-starwars/providers/Microsoft.Web/sites/gg-starwars",
-    "appService.deploySubpath": "dist\\starwars"
+    "appService.deploySubpath": "dist\\starwars",
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ]
 }
