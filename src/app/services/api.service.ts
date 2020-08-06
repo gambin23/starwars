@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Resident } from '../models/resident.model';
 import { PlanetList } from '../models/planet-list.model';
 
-const baseUrl = 'https://swapi.co/api/';
+const baseUrl = 'https://cors-anywhere.herokuapp.com/https://swapi.dev/api/';
 
 @Injectable({
   providedIn: 'root'
