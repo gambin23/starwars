@@ -6,7 +6,7 @@
 }
 
 %middle {
-  top:0;
+  top: 0;
   bottom: 0;
   left: 0;
   right: 0;
@@ -21,7 +21,7 @@
   width: 100vw;
 }
 
-.form-margin{
+.form-margin {
   @extend %middle;
   margin: 25px;
 }
@@ -30,7 +30,7 @@
   @extend %middle;
   max-height: 350px;
   max-width: 500px;
-  background-color: rgba(100,100,100, 0.35);
+  background-color: rgba(100, 100, 100, 0.35);
   color: white;
   font-family: 'Starwars';
 }
@@ -56,7 +56,7 @@
 
 #btn-login {
   background-color: yellow;
-  font-family: 'Starwars'!important;
+  font-family: 'Starwars' !important;
   padding: 0 55px;
   color: #212121;
   border-radius: 0;
@@ -81,6 +81,20 @@
 }
 
 @keyframes changeColor {
-  from {color: white;}
-  to {color: transparent;}
+  from {
+    color: white;
+  }
+
+  to {
+    color: transparent;
+  }
+}
+
+.version {
+  color: rgba(white, 0.5);
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 16px;
+  font-family: 'Starwars';
 }
