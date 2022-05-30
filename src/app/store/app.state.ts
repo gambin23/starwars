@@ -27,7 +27,7 @@ export interface IAppState {
   };
 }
 
-export const AppState: IAppState = {
+export let AppState: IAppState = {
   planets: {
     currentList: null,
     planets: [],

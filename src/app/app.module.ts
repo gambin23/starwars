@@ -45,7 +45,11 @@ import { NotApplicablePipe } from './pipes/not-applicable.pipe';
     NotApplicablePipe
   ],
   imports: [
-    StoreModule.forRoot(reducers),
+    StoreModule.forRoot(reducers, {
+      runtimeChecks: {
+        strictStateImmutability: false
+      }
+    }),
     EffectsModule.forRoot([PlanetEffects, AccountEffects, ResidentEffects]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     AppRoutingModule,

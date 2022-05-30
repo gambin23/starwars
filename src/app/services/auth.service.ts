@@ -18,7 +18,7 @@ export class AuthService {
   public login(user: User): Observable<User> {
     const foundUser = this.users.find(u => u.username === user.username);
 
-    return Observable.create((observer: Observer<User>) => {
+    return new Observable((observer: Observer<User>) => {
       setTimeout(() => {
         if (foundUser != null) {
           if (foundUser.password === user.password) {

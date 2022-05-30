@@ -5,7 +5,7 @@ import { LoginTry } from 'src/app/store/actions/account.actions';
 import { User } from '../../models/user.model';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {  Observable } from 'rxjs';
-import {version} from 'package.json';
+import packageJson from 'package.json';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     username: this.username,
     password: this.password,
   });
-  version = version;
+  version = packageJson.version;
 
   constructor(
     private store: Store<IAppState>,
